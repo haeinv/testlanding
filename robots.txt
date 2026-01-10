@@ -1,0 +1,16 @@
+# BSD AI - FitManage
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: /sitemap.xml
+
+# Googlebot 최적화
+User-agent: Googlebot
+Allow: /
+
+# 이미지 크롤링 허용
+User-agent: Googlebot-Image
+Allow: /

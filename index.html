@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FitManage - 피트니스 센터 관리 소프트웨어 | BSD AI</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI 바이브코딩, 퍼널마케팅, 자동화 툴을 한곳에. 피트니스 센터 운영 간소화, 자동 결제, 회원 관리를 한 번에 해결하세요." />
+    <meta name="keywords" content="AI 바이브코딩, 퍼널마케팅, 랜딩페이지, BSD, 퍼널띵, 피트니스 관리, 헬스장 관리" />
+    <meta name="author" content="BSD AI" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="BSD AI 사이트 모음집" />
+    <meta property="og:description" content="퍼널띵의 유익한 컨텐츠를 모아보세요. AI 바이브코딩과 퍼널마케팅 리소스가 한 곳에." />
+    <meta property="og:site_name" content="BSD AI" />
+    <meta property="og:image" content="public/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="BSD AI 사이트 모음집" />
+    <meta property="og:locale" content="ko_KR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BSD AI 사이트 모음집" />
+    <meta name="twitter:description" content="AI 바이브코딩 & 퍼널마케팅 리소스 컬렉션." />
+    <meta name="twitter:image" content="public/logo.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="public/favicon-192.png" />
+    <link rel="shortcut icon" href="public/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="public/apple-touch-icon.png" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        /* Particle Hero Section Styles */
+        .particle-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .particle-canvas {
+            border-radius: 1rem;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .particle-hero-content {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .particle-hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .particle-hero-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+    <!-- TopAppBar -->
+    <nav
+        class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/10">
+        <div class="flex items-center p-4 justify-between max-w-7xl mx-auto">
+            <div class="flex items-center gap-2">
+                <div class="text-primary flex size-8 items-center justify-center" data-icon="FitnessCenter">
+                    <span class="material-symbols-outlined text-3xl">fitness_center</span>
+                </div>
+                <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">FitManage
+                </h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">menu</span>
+                <p class="text-primary text-sm font-bold leading-normal tracking-[0.015em] hidden sm:block">로그인</p>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <!-- Particle Text Hero Section -->
+        <section class="particle-hero" id="particle-hero">
+            <canvas id="particle-canvas" class="particle-canvas"></canvas>
+            <div class="particle-hero-content">
+                <p class="text-gray-400 text-sm mb-2">운영 간소화, 자동 결제, 회원 관리를 한 번에</p>
+                <div class="particle-hero-buttons">
+                    <button
+                        class="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] transition-transform active:scale-95 hover:scale-105">
+                        <span class="truncate">무료 체험 시작</span>
+                    </button>
+                    <button
+                        class="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 border border-gray-700 bg-transparent text-white text-base font-bold leading-normal transition-colors hover:bg-white/10">
+                        <span class="truncate">데모 보기</span>
+                    </button>
+                </div>
+                <p class="text-gray-500 text-xs mt-4">4초마다 자동으로 텍스트가 변경됩니다</p>
+            </div>
+        </section>
+        <div class="max-w-7xl mx-auto">
+        <!-- FeatureSection Header -->
+        <div class="px-4 pt-12">
+            <h2
+                class="text-slate-900 dark:text-white text-[28px] @[480px]:text-[32px] font-bold leading-tight tracking-[-0.015em]">
+                주요 기능</h2>
+            <p class="text-slate-600 dark:text-slate-400 mt-2">센터 운영에 필요한 모든 것을 제공합니다.</p>
+        </div>
+        <!-- FeatureSection Cards -->
+        <section class="px-4 py-8 @container">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div
+                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">qr_code_2</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">스마트 출석 관리</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">QR 기반 체크인과
+                            실시간 회원 추적, 즉각적인 알림 기능을 제공합니다.</p>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">payments</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">자동 결제 시스템
+                        </h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">정기 결제 자동화,
+                            청구서 관리, 미결제 복구 기능을 제공합니다.</p>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">monitoring</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">성장 분석</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">회원 유지율,
+                            매출 예측, 회원 참여도에 대한 데이터 기반 분석 리포트를 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Dashboard Preview Section -->
+        <section class="px-4 py-16 bg-slate-100 dark:bg-white/5 rounded-3xl mx-4 mb-20 overflow-hidden">
+            <div class="flex flex-col items-center text-center gap-4 mb-10">
+                <h3
+                    class="text-slate-900 dark:text-white text-2xl @[480px]:text-3xl font-bold leading-tight tracking-[-0.015em]">
+                    강력한 대시보드</h3>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl">비즈니스 전체를 한눈에 파악하세요.
+                    모든 기기에서 실시간으로 성과 지표를 추적할 수 있습니다.</p>
+            </div>
+            <div
+                class="relative max-w-5xl mx-auto border border-slate-300 dark:border-white/20 rounded-xl bg-white dark:bg-background-dark shadow-2xl overflow-hidden">
+                <div
+                    class="flex items-center gap-2 p-3 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900">
+                    <div class="flex gap-1.5">
+                        <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                    </div>
+                    <div class="flex-1 text-center text-xs text-slate-400 font-medium">dashboard.fitmanage.com</div>
+                </div>
+                <div class="p-4 sm:p-8 bg-slate-50 dark:bg-[#0c1a14]">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+                        <div
+                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                전체 회원</p>
+                            <p class="text-2xl font-black text-slate-900 dark:text-white">1,284</p>
+                            <span class="text-primary text-xs font-bold">이번 달 +12%</span>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                매출</p>
+                            <p class="text-2xl font-black text-slate-900 dark:text-white">₩4,250만</p>
+                            <span class="text-primary text-xs font-bold">이번 달 +5.4%</span>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                오늘 방문</p>
+                            <p class="text-2xl font-black text-slate-900 dark:text-white">342</p>
+                            <span class="text-slate-400 text-xs font-bold">피크 시간: 오후 6시</span>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                재등록률</p>
+                            <p class="text-2xl font-black text-slate-900 dark:text-white">94%</p>
+                            <span class="text-primary text-xs font-bold">업계 최고</span>
+                        </div>
+                    </div>
+                    <div
+                        class="h-64 bg-slate-200 dark:bg-white/5 rounded-lg flex items-center justify-center overflow-hidden">
+                        <img class="w-full h-full object-cover opacity-80 dark:opacity-60"
+                            data-alt="Modern analytics dashboard interface showing charts"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlYm0xVWIbGt0WSx4IqrTWDF2J-MCLCrJhrMfOyVWMnjZtP66T56N3Wizoxhpa-lx-BbDWEFr6CtKo193RbFCQFhRRA_aspWlYWQ1U9F_fDin_Ru9M8Rna8QVfdqZFVyFK5VPv8hGdB5q9y6FgJgAIiJ6eHJvWXm4jyWPtWqw3Sp3gElU5DRwJ2AnrLPh_UcJjC8OrdIBC-2Eoxs08KPj3qtnOLFARZignklyqTEtk0pXtS2pFwefRYvdJ5gLCaYUT3KIYbax_GXk" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Form Section -->
+        <section class="px-4 py-16" id="contact-section">
+            <div class="max-w-xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-slate-900 dark:text-white text-2xl @[480px]:text-3xl font-bold leading-tight tracking-[-0.015em]">
+                        지금 시작하세요
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2">
+                        아래 양식을 작성해 주시면 24시간 내에 연락드리겠습니다.
+                    </p>
+                </div>
+                <form id="contact-form" class="flex flex-col gap-4">
+                    <!-- Name Field -->
+                    <div class="flex flex-col gap-2">
+                        <label for="name" class="text-slate-900 dark:text-white text-sm font-medium">
+                            이름 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            required
+                            placeholder="이름을 입력하세요"
+                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                    <!-- Email Field -->
+                    <div class="flex flex-col gap-2">
+                        <label for="email" class="text-slate-900 dark:text-white text-sm font-medium">
+                            이메일 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="이메일을 입력하세요"
+                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                    <!-- Phone Field -->
+                    <div class="flex flex-col gap-2">
+                        <label for="phone" class="text-slate-900 dark:text-white text-sm font-medium">
+                            연락처 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            required
+                            placeholder="010-1234-5678"
+                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                    <!-- Submit Button -->
+                    <button
+                        type="submit"
+                        id="submit-btn"
+                        class="w-full h-14 mt-4 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        제출하기
+                    </button>
+                    <!-- Form Message -->
+                    <div id="form-message" class="text-center text-sm font-medium hidden"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="px-4 py-20 text-center flex flex-col items-center gap-8">
+            <h2 class="text-slate-900 dark:text-white text-3xl @[480px]:text-5xl font-black max-w-2xl leading-tight">
+                피트니스 비즈니스를 혁신할 준비가 되셨나요?</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg">FitManage와 함께 성장한
+                수백 개의 헬스장 운영자와 함께하세요.</p>
+            <button
+                class="flex min-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-primary text-background-dark text-lg font-bold shadow-xl shadow-primary/20 transition-transform hover:scale-105 active:scale-95">
+                14일 무료 체험 시작하기
+            </button>
+            <p class="text-slate-500 text-sm font-medium">신용카드 불필요 • 언제든 취소 가능</p>
+        </section>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-white/10 px-4 py-12 text-center">
+        <div class="flex items-center gap-2 justify-center mb-6">
+            <div class="text-primary flex size-6 items-center justify-center">
+                <span class="material-symbols-outlined text-2xl">fitness_center</span>
+            </div>
+            <h2 class="text-slate-900 dark:text-white text-base font-bold">FitManage</h2>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6 mb-8 text-slate-600 dark:text-slate-400 text-sm font-medium">
+            <a href="#">기능</a>
+            <a href="#">요금제</a>
+            <a href="#">고객 후기</a>
+            <a href="#">고객 지원</a>
+            <a href="#">개인정보처리방침</a>
+        </div>
+        <p class="text-slate-500 text-xs">© 2024 FitManage SaaS. All rights reserved.</p>
+    </footer>
+    <div class="h-8"></div>
+
+    <!-- Particle Text Effect Script -->
+    <script>
+        (function() {
+            // Particle class
+            class Particle {
+                constructor() {
+                    this.pos = { x: 0, y: 0 };
+                    this.vel = { x: 0, y: 0 };
+                    this.acc = { x: 0, y: 0 };
+                    this.target = { x: 0, y: 0 };
+                    this.closeEnoughTarget = 100;
+                    this.maxSpeed = 1.0;
+                    this.maxForce = 0.1;
+                    this.particleSize = 10;
+                    this.isKilled = false;
+                    this.startColor = { r: 0, g: 0, b: 0 };
+                    this.targetColor = { r: 0, g: 0, b: 0 };
+                    this.colorWeight = 0;
+                    this.colorBlendRate = 0.01;
+                }
+
+                move() {
+                    let proximityMult = 1;
+                    const distance = Math.sqrt(
+                        Math.pow(this.pos.x - this.target.x, 2) +
+                        Math.pow(this.pos.y - this.target.y, 2)
+                    );
+
+                    if (distance < this.closeEnoughTarget) {
+                        proximityMult = distance / this.closeEnoughTarget;
+                    }
+
+                    const towardsTarget = {
+                        x: this.target.x - this.pos.x,
+                        y: this.target.y - this.pos.y,
+                    };
+
+                    const magnitude = Math.sqrt(towardsTarget.x * towardsTarget.x + towardsTarget.y * towardsTarget.y);
+                    if (magnitude > 0) {
+                        towardsTarget.x = (towardsTarget.x / magnitude) * this.maxSpeed * proximityMult;
+                        towardsTarget.y = (towardsTarget.y / magnitude) * this.maxSpeed * proximityMult;
+                    }
+
+                    const steer = {
+                        x: towardsTarget.x - this.vel.x,
+                        y: towardsTarget.y - this.vel.y,
+                    };
+
+                    const steerMagnitude = Math.sqrt(steer.x * steer.x + steer.y * steer.y);
+                    if (steerMagnitude > 0) {
+                        steer.x = (steer.x / steerMagnitude) * this.maxForce;
+                        steer.y = (steer.y / steerMagnitude) * this.maxForce;
+                    }
+
+                    this.acc.x += steer.x;
+                    this.acc.y += steer.y;
+
+                    this.vel.x += this.acc.x;
+                    this.vel.y += this.acc.y;
+                    this.pos.x += this.vel.x;
+                    this.pos.y += this.vel.y;
+                    this.acc.x = 0;
+                    this.acc.y = 0;
+                }
+
+                draw(ctx) {
+                    if (this.colorWeight < 1.0) {
+                        this.colorWeight = Math.min(this.colorWeight + this.colorBlendRate, 1.0);
+                    }
+
+                    const currentColor = {
+                        r: Math.round(this.startColor.r + (this.targetColor.r - this.startColor.r) * this.colorWeight),
+                        g: Math.round(this.startColor.g + (this.targetColor.g - this.startColor.g) * this.colorWeight),
+                        b: Math.round(this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight),
+                    };
+
+                    ctx.fillStyle = `rgb(${currentColor.r}, ${currentColor.g}, ${currentColor.b})`;
+                    ctx.fillRect(this.pos.x, this.pos.y, 2, 2);
+                }
+
+                kill(width, height) {
+                    if (!this.isKilled) {
+                        const randomPos = this.generateRandomPos(width / 2, height / 2, (width + height) / 2);
+                        this.target.x = randomPos.x;
+                        this.target.y = randomPos.y;
+
+                        this.startColor = {
+                            r: this.startColor.r + (this.targetColor.r - this.startColor.r) * this.colorWeight,
+                            g: this.startColor.g + (this.targetColor.g - this.startColor.g) * this.colorWeight,
+                            b: this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight,
+                        };
+                        this.targetColor = { r: 0, g: 0, b: 0 };
+                        this.colorWeight = 0;
+                        this.isKilled = true;
+                    }
+                }
+
+                generateRandomPos(x, y, mag) {
+                    const randomX = Math.random() * 1000;
+                    const randomY = Math.random() * 500;
+
+                    const direction = {
+                        x: randomX - x,
+                        y: randomY - y,
+                    };
+
+                    const magnitude = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
+                    if (magnitude > 0) {
+                        direction.x = (direction.x / magnitude) * mag;
+                        direction.y = (direction.y / magnitude) * mag;
+                    }
+
+                    return {
+                        x: x + direction.x,
+                        y: y + direction.y,
+                    };
+                }
+            }
+
+            // Main initialization
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            let frameCount = 0;
+            let wordIndex = 0;
+            let animationId;
+
+            // FitManage themed words (Korean)
+            const words = ["FitManage", "성장하세요", "관리하세요", "성공하세요", "피트니스"];
+            const pixelSteps = 6;
+
+            // Set canvas size
+            function resizeCanvas() {
+                const container = document.getElementById('particle-hero');
+                canvas.width = Math.min(1000, window.innerWidth - 32);
+                canvas.height = Math.min(500, window.innerHeight * 0.6);
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            function generateRandomPos(x, y, mag) {
+                const randomX = Math.random() * canvas.width;
+                const randomY = Math.random() * canvas.height;
+
+                const direction = {
+                    x: randomX - x,
+                    y: randomY - y,
+                };
+
+                const magnitude = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
+                if (magnitude > 0) {
+                    direction.x = (direction.x / magnitude) * mag;
+                    direction.y = (direction.y / magnitude) * mag;
+                }
+
+                return {
+                    x: x + direction.x,
+                    y: y + direction.y,
+                };
+            }
+
+            function nextWord(word) {
+                const offscreenCanvas = document.createElement('canvas');
+                offscreenCanvas.width = canvas.width;
+                offscreenCanvas.height = canvas.height;
+                const offscreenCtx = offscreenCanvas.getContext('2d');
+
+                // Dynamic font size based on canvas width
+                const fontSize = Math.min(100, canvas.width / 8);
+
+                offscreenCtx.fillStyle = 'white';
+                offscreenCtx.font = `bold ${fontSize}px Inter, Arial, sans-serif`;
+                offscreenCtx.textAlign = 'center';
+                offscreenCtx.textBaseline = 'middle';
+                offscreenCtx.fillText(word, canvas.width / 2, canvas.height / 2);
+
+                const imageData = offscreenCtx.getImageData(0, 0, canvas.width, canvas.height);
+                const pixels = imageData.data;
+
+                // Generate primary color (#13ec92) with variations
+                const newColor = {
+                    r: 19 + Math.random() * 50,
+                    g: 200 + Math.random() * 55,
+                    b: 100 + Math.random() * 50,
+                };
+
+                let particleIndex = 0;
+
+                const coordsIndexes = [];
+                for (let i = 0; i < pixels.length; i += pixelSteps * 4) {
+                    coordsIndexes.push(i);
+                }
+
+                // Shuffle for fluid motion
+                for (let i = coordsIndexes.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [coordsIndexes[i], coordsIndexes[j]] = [coordsIndexes[j], coordsIndexes[i]];
+                }
+
+                for (const coordIndex of coordsIndexes) {
+                    const pixelIndex = coordIndex;
+                    const alpha = pixels[pixelIndex + 3];
+
+                    if (alpha > 0) {
+                        const x = (pixelIndex / 4) % canvas.width;
+                        const y = Math.floor(pixelIndex / 4 / canvas.width);
+
+                        let particle;
+
+                        if (particleIndex < particles.length) {
+                            particle = particles[particleIndex];
+                            particle.isKilled = false;
+                            particleIndex++;
+                        } else {
+                            particle = new Particle();
+
+                            const randomPos = generateRandomPos(canvas.width / 2, canvas.height / 2, (canvas.width + canvas.height) / 2);
+                            particle.pos.x = randomPos.x;
+                            particle.pos.y = randomPos.y;
+
+                            particle.maxSpeed = Math.random() * 6 + 4;
+                            particle.maxForce = particle.maxSpeed * 0.05;
+                            particle.particleSize = Math.random() * 6 + 6;
+                            particle.colorBlendRate = Math.random() * 0.0275 + 0.0025;
+
+                            particles.push(particle);
+                        }
+
+                        particle.startColor = {
+                            r: particle.startColor.r + (particle.targetColor.r - particle.startColor.r) * particle.colorWeight,
+                            g: particle.startColor.g + (particle.targetColor.g - particle.startColor.g) * particle.colorWeight,
+                            b: particle.startColor.b + (particle.targetColor.b - particle.startColor.b) * particle.colorWeight,
+                        };
+                        particle.targetColor = newColor;
+                        particle.colorWeight = 0;
+
+                        particle.target.x = x;
+                        particle.target.y = y;
+                    }
+                }
+
+                // Kill remaining particles
+                for (let i = particleIndex; i < particles.length; i++) {
+                    particles[i].kill(canvas.width, canvas.height);
+                }
+            }
+
+            function animate() {
+                // Background with motion blur
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Update and draw particles
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const particle = particles[i];
+                    particle.move();
+                    particle.draw(ctx);
+
+                    // Remove dead particles
+                    if (particle.isKilled) {
+                        if (
+                            particle.pos.x < 0 ||
+                            particle.pos.x > canvas.width ||
+                            particle.pos.y < 0 ||
+                            particle.pos.y > canvas.height
+                        ) {
+                            particles.splice(i, 1);
+                        }
+                    }
+                }
+
+                // Auto-advance words every 4 seconds (240 frames at 60fps)
+                frameCount++;
+                if (frameCount % 240 === 0) {
+                    wordIndex = (wordIndex + 1) % words.length;
+                    nextWord(words[wordIndex]);
+                }
+
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Start
+            nextWord(words[0]);
+            animate();
+
+            // Cleanup on page unload
+            window.addEventListener('beforeunload', () => {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+            });
+        })();
+    </script>
+
+    <!-- Contact Form Script -->
+    <script>
+        (function() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const formMessage = document.getElementById('form-message');
+
+            if (!form) return;
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+
+                // Validate
+                if (!formData.name || !formData.email || !formData.phone) {
+                    showMessage('모든 필드를 입력해 주세요.', 'error');
+                    return;
+                }
+
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(formData.email)) {
+                    showMessage('올바른 이메일 주소를 입력해 주세요.', 'error');
+                    return;
+                }
+
+                // Disable button and show loading
+                submitBtn.disabled = true;
+                submitBtn.textContent = '제출 중...';
+
+                try {
+                    // Google Apps Script Web App URL
+                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzS7GyCfTLfjulEbi4-5j1nO8DmTv3_HMUaohLmIZcjq7pIpOo8XIKm1MqPiBlAF6wh/exec';
+
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    // no-cors 모드에서는 response를 읽을 수 없으므로 성공으로 처리
+                    console.log('Form submitted to Google Sheets:', formData);
+
+                    // Success
+                    showMessage('감사합니다! 곧 연락드리겠습니다.', 'success');
+                    form.reset();
+
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    showMessage('오류가 발생했습니다. 다시 시도해 주세요.', 'error');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '제출하기';
+                }
+            });
+
+            function showMessage(text, type) {
+                formMessage.textContent = text;
+                formMessage.classList.remove('hidden', 'text-primary', 'text-red-500');
+                formMessage.classList.add(type === 'success' ? 'text-primary' : 'text-red-500');
+
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 5000);
+            }
+        })();
+    </script>
+</body>
+
+</html>
