@@ -3,7 +3,28 @@
     "allow": [
       "Bash(sips:*)",
       "Bash(git config:*)",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(brew install:*)",
+      "Bash(gh auth:*)",
+      "Bash(git clone:*)",
+      "Bash(./install.sh)",
+      "Bash(TERM=xterm bash ~/.claude/superclaude/install.sh)",
+      "Bash(source ~/.local/bin/env)",
+      "Bash(uv venv:*)",
+      "Bash(source .venv/bin/activate)",
+      "Bash(uv pip install:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright install:*)",
+      "Bash(node scripts/crawl-news.js:*)",
+      "Bash(node /Users/shinhaein/Desktop/landing/scripts/debug-crawler.js:*)",
+      "Bash(ls:*)",
+      "Bash(npm i:*)",
+      "Bash(npx vercel:*)"
     ]
   }
 }

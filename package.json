@@ -1,0 +1,27 @@
+{
+  "name": "landing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "crawl": "node scripts/crawl-news.js",
+    "auto-update": "node scripts/auto-update.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haeinv/testlanding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/haeinv/testlanding/issues"
+  },
+  "homepage": "https://github.com/haeinv/testlanding#readme",
+  "dependencies": {
+    "next-sitemap": "^4.2.3",
+    "playwright": "^1.57.0"
+  }
+}

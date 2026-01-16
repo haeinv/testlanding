@@ -1,11 +1,11 @@
-# BSD AI - FitManage
+# FitChat - 피트니스 센터 관리 프로그램
 # https://www.robotstxt.org/robotstxt.html
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: /sitemap.xml
+Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
 
 # Googlebot 최적화
 User-agent: Googlebot

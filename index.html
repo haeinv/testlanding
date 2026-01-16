@@ -5,32 +5,32 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>FitManage - 피트니스 센터 관리 소프트웨어 | BSD AI</title>
+    <title>FitChat - 단 하나로 끝나는 센터관리 프로그램</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="AI 바이브코딩, 퍼널마케팅, 자동화 툴을 한곳에. 피트니스 센터 운영 간소화, 자동 결제, 회원 관리를 한 번에 해결하세요." />
-    <meta name="keywords" content="AI 바이브코딩, 퍼널마케팅, 랜딩페이지, BSD, 퍼널띵, 피트니스 관리, 헬스장 관리" />
-    <meta name="author" content="BSD AI" />
+    <meta name="description" content="FitChat은 효율적인 센터 관리, 회원에겐 기억에 남는 관리, 트레이너에겐 전문성을 끌어올리는 All-in-One 피트니스 센터 관리 시스템입니다." />
+    <meta name="keywords" content="피트니스 관리, 헬스장 관리, PT 관리, 센터 관리 프로그램, 회원 관리, 트레이너 관리, 자동 결제, FitChat, 핏챗" />
+    <meta name="author" content="FitChat" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="" />
-    <meta property="og:title" content="BSD AI 사이트 모음집" />
-    <meta property="og:description" content="퍼널띵의 유익한 컨텐츠를 모아보세요. AI 바이브코딩과 퍼널마케팅 리소스가 한 곳에." />
-    <meta property="og:site_name" content="BSD AI" />
-    <meta property="og:image" content="public/logo.png" />
+    <meta property="og:title" content="FitChat - 단 하나로 끝나는 센터관리 프로그램" />
+    <meta property="og:description" content="효율적인 센터 관리, 회원에겐 기억에 남는 관리, 트레이너에겐 전문성을 끌어올리는 All-in-One 시스템" />
+    <meta property="og:site_name" content="FitChat" />
+    <meta property="og:image" content="public/fitchat.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="BSD AI 사이트 모음집" />
+    <meta property="og:image:alt" content="FitChat - 피트니스 센터 관리 프로그램" />
     <meta property="og:locale" content="ko_KR" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="BSD AI 사이트 모음집" />
-    <meta name="twitter:description" content="AI 바이브코딩 & 퍼널마케팅 리소스 컬렉션." />
-    <meta name="twitter:image" content="public/logo.png" />
+    <meta name="twitter:title" content="FitChat - 단 하나로 끝나는 센터관리 프로그램" />
+    <meta name="twitter:description" content="효율적인 센터 관리, 회원에겐 기억에 남는 관리, 트레이너에겐 전문성을 끌어올리는 All-in-One 시스템" />
+    <meta name="twitter:image" content="public/fitchat.png" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32.png" />
@@ -72,6 +72,15 @@
 
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Line clamp utilities for news cards */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     </style>
     <style>
@@ -130,7 +139,7 @@
                 <div class="text-primary flex size-8 items-center justify-center" data-icon="FitnessCenter">
                     <span class="material-symbols-outlined text-3xl">fitness_center</span>
                 </div>
-                <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">FitManage
+                <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">FitChat
                 </h2>
             </div>
             <div class="flex items-center gap-4">
@@ -144,7 +153,9 @@
         <section class="particle-hero" id="particle-hero">
             <canvas id="particle-canvas" class="particle-canvas"></canvas>
             <div class="particle-hero-content">
-                <p class="text-gray-400 text-sm mb-2">운영 간소화, 자동 결제, 회원 관리를 한 번에</p>
+                <p class="text-white text-3xl sm:text-4xl font-bold mb-4">단 하나로 끝나는 센터관리 프로그램</p>
+                <p class="text-gray-400 text-lg sm:text-xl mb-2">관리는 쉽게, 회원은 감동하게.</p>
+                <p class="text-primary text-lg sm:text-xl font-semibold mb-6">핏챗은 숫자로 증명합니다</p>
                 <div class="particle-hero-buttons">
                     <button
                         class="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] transition-transform active:scale-95 hover:scale-105">
@@ -155,7 +166,6 @@
                         <span class="truncate">데모 보기</span>
                     </button>
                 </div>
-                <p class="text-gray-500 text-xs mt-4">4초마다 자동으로 텍스트가 변경됩니다</p>
             </div>
         </section>
         <div class="max-w-7xl mx-auto">
@@ -168,16 +178,15 @@
         </div>
         <!-- FeatureSection Cards -->
         <section class="px-4 py-8 @container">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div
                     class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
                     <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-2xl">qr_code_2</span>
+                        <span class="material-symbols-outlined text-2xl">notifications_active</span>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">스마트 출석 관리</h2>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">QR 기반 체크인과
-                            실시간 회원 추적, 즉각적인 알림 기능을 제공합니다.</p>
+                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">1:1 수업알림 및 일지발송</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">개별 회원에게 수업 알림을 보내고, 운동 일지를 자동으로 발송합니다.</p>
                     </div>
                 </div>
                 <div
@@ -195,12 +204,31 @@
                 <div
                     class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
                     <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-2xl">monitoring</span>
+                        <span class="material-symbols-outlined text-2xl">description</span>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">성장 분석</h2>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">회원 유지율,
-                            매출 예측, 회원 참여도에 대한 데이터 기반 분석 리포트를 제공합니다.</p>
+                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">데이터기반, 회원보고서</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">회원 데이터를 분석하여 맞춤형 보고서를 자동 생성하고 제공합니다.</p>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">trending_up</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">매출 관리</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">센터 전체 매출 및 트레이너별 매출을 실시간으로 추적하고 분석합니다.</p>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">forum</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">업무 게시판</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">트레이너 간 업무 공유 및 공지사항을 효율적으로 관리합니다.</p>
                     </div>
                 </div>
             </div>
@@ -265,15 +293,16 @@
                 </div>
             </div>
         </section>
+
         <!-- Contact Form Section -->
         <section class="px-4 py-16" id="contact-section">
             <div class="max-w-xl mx-auto">
                 <div class="text-center mb-10">
                     <h2 class="text-slate-900 dark:text-white text-2xl @[480px]:text-3xl font-bold leading-tight tracking-[-0.015em]">
-                        지금 시작하세요
+                        지금 시작하세요!
                     </h2>
                     <p class="text-slate-600 dark:text-slate-400 mt-2">
-                        아래 양식을 작성해 주시면 24시간 내에 연락드리겠습니다.
+                        아래 신청서를 작성해주시면 'FitChat 사용 설명서'를 보내드립니다.
                     </p>
                 </div>
                 <form id="contact-form" class="flex flex-col gap-4">
@@ -319,6 +348,20 @@
                             class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                         />
                     </div>
+                    <!-- Center Name Field -->
+                    <div class="flex flex-col gap-2">
+                        <label for="center" class="text-slate-900 dark:text-white text-sm font-medium">
+                            센터명 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="center"
+                            name="center"
+                            required
+                            placeholder="센터명을 입력하세요"
+                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
                     <!-- Submit Button -->
                     <button
                         type="submit"
@@ -336,14 +379,13 @@
         <!-- Final CTA -->
         <section class="px-4 py-20 text-center flex flex-col items-center gap-8">
             <h2 class="text-slate-900 dark:text-white text-3xl @[480px]:text-5xl font-black max-w-2xl leading-tight">
-                피트니스 비즈니스를 혁신할 준비가 되셨나요?</h2>
-            <p class="text-slate-600 dark:text-slate-400 text-lg">FitManage와 함께 성장한
-                수백 개의 헬스장 운영자와 함께하세요.</p>
-            <button
-                class="flex min-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-primary text-background-dark text-lg font-bold shadow-xl shadow-primary/20 transition-transform hover:scale-105 active:scale-95">
-                14일 무료 체험 시작하기
-            </button>
-            <p class="text-slate-500 text-sm font-medium">신용카드 불필요 • 언제든 취소 가능</p>
+                피트니스센터를 <span class="text-primary">'제대로'</span> 운영할 준비가 되셨나요?</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg max-w-xl leading-relaxed">
+                FitChat은 <span class="text-slate-900 dark:text-white font-semibold">'효율적인 센터 관리'</span>는 물론,<br>
+                회원에겐 <span class="text-slate-900 dark:text-white font-semibold">'기억에 남는 관리'</span>를,<br>
+                트레이너에겐 <span class="text-slate-900 dark:text-white font-semibold">'자신의 전문성을 한 단계 끌어올릴 수 있는'</span><br>
+                <span class="text-primary font-bold">All-in-One 시스템</span>입니다.
+            </p>
         </section>
         </div>
     </main>
@@ -353,7 +395,7 @@
             <div class="text-primary flex size-6 items-center justify-center">
                 <span class="material-symbols-outlined text-2xl">fitness_center</span>
             </div>
-            <h2 class="text-slate-900 dark:text-white text-base font-bold">FitManage</h2>
+            <h2 class="text-slate-900 dark:text-white text-base font-bold">FitChat</h2>
         </div>
         <div class="flex flex-wrap justify-center gap-6 mb-8 text-slate-600 dark:text-slate-400 text-sm font-medium">
             <a href="#">기능</a>
@@ -362,9 +404,70 @@
             <a href="#">고객 지원</a>
             <a href="#">개인정보처리방침</a>
         </div>
-        <p class="text-slate-500 text-xs">© 2024 FitManage SaaS. All rights reserved.</p>
+        <p class="text-slate-500 text-xs">© 2024 FitChat SaaS. All rights reserved.</p>
     </footer>
     <div class="h-8"></div>
+
+    <!-- AI Chatbot Widget -->
+    <div id="chatbot-container">
+        <!-- Chatbot Toggle Button -->
+        <button id="chatbot-toggle" class="fixed bottom-6 right-6 w-14 h-14 bg-primary rounded-full shadow-lg shadow-primary/30 flex items-center justify-center cursor-pointer transition-all hover:scale-110 active:scale-95 z-50">
+            <span id="chatbot-icon" class="material-symbols-outlined text-background-dark text-2xl">chat</span>
+        </button>
+
+        <!-- Chatbot Window -->
+        <div id="chatbot-window" class="fixed bottom-24 right-6 w-[360px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-120px)] bg-white dark:bg-[#1a2e24] rounded-2xl shadow-2xl border border-slate-200 dark:border-white/10 flex flex-col overflow-hidden z-50 hidden">
+            <!-- Header -->
+            <div class="bg-primary px-4 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-background-dark">smart_toy</span>
+                    </div>
+                    <div>
+                        <h3 class="text-background-dark font-bold text-sm">FitChat AI 도우미</h3>
+                        <p class="text-background-dark/70 text-xs">무엇이든 물어보세요</p>
+                    </div>
+                </div>
+                <button id="chatbot-close" class="text-background-dark/70 hover:text-background-dark transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- Welcome Message -->
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
+                    </div>
+                    <div class="bg-slate-100 dark:bg-white/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
+                        <p class="text-slate-800 dark:text-white text-sm">안녕하세요! 👋 FitChat AI 도우미입니다.<br><br>피트니스 센터 관리, 기능, 가격 등 궁금한 점을 물어보세요!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 border-t border-slate-200 dark:border-white/10">
+                <form id="chat-form" class="flex gap-2">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        placeholder="메시지를 입력하세요..."
+                        class="flex-1 h-11 px-4 rounded-full border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        autocomplete="off"
+                    />
+                    <button
+                        type="submit"
+                        id="chat-send"
+                        class="w-11 h-11 bg-primary rounded-full flex items-center justify-center transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
+                    >
+                        <span class="material-symbols-outlined text-background-dark text-xl">send</span>
+                    </button>
+                </form>
+                <p class="text-center text-xs text-slate-400 mt-2">Powered by Google Gemini AI</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Particle Text Effect Script -->
     <script>
@@ -495,8 +598,8 @@
             let wordIndex = 0;
             let animationId;
 
-            // FitManage themed words (Korean)
-            const words = ["FitManage", "성장하세요", "관리하세요", "성공하세요", "피트니스"];
+            // FitChat themed words (Korean)
+            const words = ["FitChat", "성장하세요", "관리하세요", "성공하세요", "피트니스"];
             const pixelSteps = 6;
 
             // Set canvas size
@@ -680,11 +783,12 @@
                     name: document.getElementById('name').value.trim(),
                     email: document.getElementById('email').value.trim(),
                     phone: document.getElementById('phone').value.trim(),
+                    center: document.getElementById('center').value.trim(),
                     timestamp: new Date().toISOString()
                 };
 
                 // Validate
-                if (!formData.name || !formData.email || !formData.phone) {
+                if (!formData.name || !formData.email || !formData.phone || !formData.center) {
                     showMessage('모든 필드를 입력해 주세요.', 'error');
                     return;
                 }
@@ -702,7 +806,7 @@
 
                 try {
                     // Google Apps Script Web App URL
-                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzS7GyCfTLfjulEbi4-5j1nO8DmTv3_HMUaohLmIZcjq7pIpOo8XIKm1MqPiBlAF6wh/exec';
+                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlD3H5xTKldTZ-Nq-3jBTXivLlul7IxxVDQN0Z5a6jqnVw0mCOVAhiGceUMZ3fH33BdQ/exec';
 
                     const response = await fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
@@ -741,6 +845,254 @@
             }
         })();
     </script>
+
+    <!-- AI Chatbot Script (Gemini API) -->
+    <script>
+        (function() {
+            const GEMINI_API_KEY = 'AIzaSyAwZ6g01fi8yNZXNDSavkbcNsJov7IO2CI';
+            const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+
+            // DOM Elements
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotIcon = document.getElementById('chatbot-icon');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatSend = document.getElementById('chat-send');
+
+            // Conversation history for context
+            let conversationHistory = [];
+
+            // Session ID for tracking conversations
+            const sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+            // Google Apps Script URL (same as contact form)
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlD3H5xTKldTZ-Nq-3jBTXivLlul7IxxVDQN0Z5a6jqnVw0mCOVAhiGceUMZ3fH33BdQ/exec';
+
+            // Save chat message to Google Sheets
+            async function saveChatToSheet(sender, message) {
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            type: 'chatbot',
+                            sessionId: sessionId,
+                            sender: sender,
+                            message: message,
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+                } catch (error) {
+                    console.error('Failed to save chat:', error);
+                }
+            }
+
+            // System prompt for FitChat context
+            const systemPrompt = `당신은 피트니스매니저(FitChat)의 친절한 AI 고객 도우미입니다. 피트니스매니저(FitChat)는 피트니스 센터 관리 소프트웨어입니다.
+
+주요 기능:
+- 1:1 회원관리 및 기록: 개별 회원의 운동 이력, 목표, 진행 상황을 체계적으로 관리
+- 회원일지를 통한 데이터 분석 및 맞춤 보고서 작성: 회원별 운동 데이터를 분석하여 맞춤형 리포트 제공
+- 센터 매출 및 트레이너별 매출 보고: 전체 센터 매출과 각 트레이너의 실적을 한눈에 파악
+- 자동결제시스템: 정기 결제 자동화, 청구서 관리, 미결제 알림 및 복구 기능
+
+요금제 (회원수 기준):
+- 회원 50명 미만: 월 50,000원
+- 회원 51명~100명: 월 90,000원
+- 회원 100명 초과: 월 150,000원
+- 첫달 무료: 등록 후 첫 한달은 적응기간으로 무료 사용 가능
+
+자료 발송 안내:
+- 자료는 매일 밤 오후 10시에 발송됩니다.
+- 당일 오후 10시 이후에 신청하셨다면, 다음날 오후 10시에 일괄 발송됩니다.
+
+혜택:
+- 24/7 고객 지원
+- 무료 온보딩 교육
+- 데이터 마이그레이션 지원
+- 모바일 앱 제공
+
+항상 친절하고 도움이 되는 답변을 제공하세요. 한국어로 답변하세요. 답변은 간결하게 2-3문장으로 유지하세요.`;
+
+            // Toggle chatbot window
+            chatbotToggle.addEventListener('click', () => {
+                const isHidden = chatbotWindow.classList.contains('hidden');
+                if (isHidden) {
+                    chatbotWindow.classList.remove('hidden');
+                    chatbotIcon.textContent = 'close';
+                    chatInput.focus();
+                } else {
+                    chatbotWindow.classList.add('hidden');
+                    chatbotIcon.textContent = 'chat';
+                }
+            });
+
+            chatbotClose.addEventListener('click', () => {
+                chatbotWindow.classList.add('hidden');
+                chatbotIcon.textContent = 'chat';
+            });
+
+            // Add message to chat
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
+
+                if (isUser) {
+                    messageDiv.innerHTML = `
+                        <div class="bg-primary rounded-2xl rounded-tr-sm px-4 py-3 max-w-[80%]">
+                            <p class="text-background-dark text-sm">${escapeHtml(text)}</p>
+                        </div>
+                    `;
+                } else {
+                    messageDiv.innerHTML = `
+                        <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
+                        </div>
+                        <div class="bg-slate-100 dark:bg-white/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
+                            <p class="text-slate-800 dark:text-white text-sm">${text}</p>
+                        </div>
+                    `;
+                }
+
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Add typing indicator
+            function addTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'flex gap-3';
+                typingDiv.innerHTML = `
+                    <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
+                    </div>
+                    <div class="bg-slate-100 dark:bg-white/10 rounded-2xl rounded-tl-sm px-4 py-3">
+                        <div class="flex gap-1">
+                            <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0ms;"></span>
+                            <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 150ms;"></span>
+                            <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
+                        </div>
+                    </div>
+                `;
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function removeTypingIndicator() {
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+
+            // Escape HTML to prevent XSS
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // Send message to Gemini API
+            async function sendToGemini(userMessage) {
+                conversationHistory.push({
+                    role: 'user',
+                    parts: [{ text: userMessage }]
+                });
+
+                const requestBody = {
+                    contents: [
+                        {
+                            role: 'user',
+                            parts: [{ text: systemPrompt }]
+                        },
+                        {
+                            role: 'model',
+                            parts: [{ text: '안녕하세요! FitChat AI 도우미입니다. 피트니스 센터 관리에 대해 궁금한 점을 물어보세요!' }]
+                        },
+                        ...conversationHistory
+                    ],
+                    generationConfig: {
+                        temperature: 0.7,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 1024,
+                    }
+                };
+
+                try {
+                    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestBody)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || '죄송합니다. 응답을 생성하지 못했습니다.';
+
+                    conversationHistory.push({
+                        role: 'model',
+                        parts: [{ text: aiResponse }]
+                    });
+
+                    return aiResponse;
+                } catch (error) {
+                    console.error('Gemini API Error:', error);
+                    return '죄송합니다. 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+                }
+            }
+
+            // Handle form submit
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const message = chatInput.value.trim();
+                if (!message) return;
+
+                // Add user message
+                addMessage(message, true);
+                chatInput.value = '';
+
+                // Save user message to Google Sheets
+                saveChatToSheet('user', message);
+
+                // Disable input while processing
+                chatInput.disabled = true;
+                chatSend.disabled = true;
+
+                // Show typing indicator
+                addTypingIndicator();
+
+                // Get AI response
+                const response = await sendToGemini(message);
+
+                // Remove typing indicator and add response
+                removeTypingIndicator();
+                addMessage(response, false);
+
+                // Save AI response to Google Sheets
+                saveChatToSheet('ai', response);
+
+                // Re-enable input
+                chatInput.disabled = false;
+                chatSend.disabled = false;
+                chatInput.focus();
+            });
+        })();
+    </script>
+
 </body>
 
 </html>
