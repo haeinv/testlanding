@@ -20,6 +20,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
 
     <script>
@@ -192,10 +193,10 @@
     <!-- Firebase Config -->
     <script src="firebase-config.js"></script>
     <script>
-        // Check if already logged in
+        // Check if already logged in - 이미 로그인된 상태면 메인으로 이동
         auth.onAuthStateChanged((user) => {
             if (user) {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'index.html';
             }
         });
 
@@ -218,15 +219,14 @@
             submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 처리중...';
             submitBtn.disabled = true;
 
-            // Set persistence based on remember checkbox
-            const persistence = remember ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
-            await auth.setPersistence(persistence);
+            // 항상 LOCAL persistence 사용 (브라우저 닫아도 로그인 유지)
+            await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
             // Firebase login
             const result = await signInWithEmail(email, password);
 
             if (result.success) {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'index.html';
             } else {
                 let errorMessage = '로그인 중 오류가 발생했습니다.';
                 if (result.error.includes('user-not-found')) {
@@ -248,6 +248,8 @@
         document.querySelector('button:has(svg path[fill="#4285F4"])').addEventListener('click', async function() {
             const provider = new firebase.auth.GoogleAuthProvider();
             try {
+                // 항상 LOCAL persistence 사용
+                await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
                 const result = await auth.signInWithPopup(provider);
                 const user = result.user;
 
@@ -264,7 +266,7 @@
                     });
                 }
 
-                window.location.href = 'dashboard.html';
+                window.location.href = 'index.html';
             } catch (error) {
                 console.error('Google login error:', error);
                 if (error.code !== 'auth/popup-closed-by-user') {
