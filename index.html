@@ -8,7 +8,8 @@
     <title>FitChat - 단 하나로 끝나는 센터관리 프로그램</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="FitChat은 효율적인 센터 관리, 회원에겐 기억에 남는 관리, 트레이너에겐 전문성을 끌어올리는 All-in-One 피트니스 센터 관리 시스템입니다." />
+    <meta name="description"
+        content="FitChat은 효율적인 센터 관리, 회원에겐 기억에 남는 관리, 트레이너에겐 전문성을 끌어올리는 All-in-One 피트니스 센터 관리 시스템입니다." />
     <meta name="keywords" content="피트니스 관리, 헬스장 관리, PT 관리, 센터 관리 프로그램, 회원 관리, 트레이너 관리, 자동 결제, FitChat, 핏챗" />
     <meta name="author" content="FitChat" />
     <meta name="robots" content="index, follow" />
@@ -142,9 +143,11 @@
                 <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">FitChat
                 </h2>
             </div>
-            <div class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">menu</span>
+            <div class="flex items-center gap-6">
+                <a href="about.html" class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors hidden sm:block">회사소개</a>
+                <a href="#contact" class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors hidden sm:block">회원가입</a>
                 <p class="text-primary text-sm font-bold leading-normal tracking-[0.015em] hidden sm:block">로그인</p>
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-400 sm:hidden">menu</span>
             </div>
         </div>
     </nav>
@@ -169,224 +172,209 @@
             </div>
         </section>
         <div class="max-w-7xl mx-auto">
-        <!-- FeatureSection Header -->
-        <div class="px-4 pt-12">
-            <h2
-                class="text-slate-900 dark:text-white text-[28px] @[480px]:text-[32px] font-bold leading-tight tracking-[-0.015em]">
-                주요 기능</h2>
-            <p class="text-slate-600 dark:text-slate-400 mt-2">센터 운영에 필요한 모든 것을 제공합니다.</p>
-        </div>
-        <!-- FeatureSection Cards -->
-        <section class="px-4 py-8 @container">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                <div
-                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
-                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-2xl">notifications_active</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">1:1 수업알림 및 일지발송</h2>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">개별 회원에게 수업 알림을 보내고, 운동 일지를 자동으로 발송합니다.</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
-                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-2xl">payments</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">자동 결제 시스템
-                        </h2>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">정기 결제 자동화,
-                            청구서 관리, 미결제 복구 기능을 제공합니다.</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
-                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-2xl">description</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">데이터기반, 회원보고서</h2>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">회원 데이터를 분석하여 맞춤형 보고서를 자동 생성하고 제공합니다.</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
-                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-2xl">trending_up</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">매출 관리</h2>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">센터 전체 매출 및 트레이너별 매출을 실시간으로 추적하고 분석합니다.</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
-                    <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-2xl">forum</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">업무 게시판</h2>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">트레이너 간 업무 공유 및 공지사항을 효율적으로 관리합니다.</p>
-                    </div>
-                </div>
+            <!-- FeatureSection Header -->
+            <div class="px-4 pt-12">
+                <h2
+                    class="text-slate-900 dark:text-white text-[28px] @[480px]:text-[32px] font-bold leading-tight tracking-[-0.015em]">
+                    주요 기능</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2">센터 운영에 필요한 모든 것을 제공합니다.</p>
             </div>
-        </section>
-        <!-- Dashboard Preview Section -->
-        <section class="px-4 py-16 bg-slate-100 dark:bg-white/5 rounded-3xl mx-4 mb-20 overflow-hidden">
-            <div class="flex flex-col items-center text-center gap-4 mb-10">
-                <h3
-                    class="text-slate-900 dark:text-white text-2xl @[480px]:text-3xl font-bold leading-tight tracking-[-0.015em]">
-                    강력한 대시보드</h3>
-                <p class="text-slate-600 dark:text-slate-400 max-w-2xl">비즈니스 전체를 한눈에 파악하세요.
-                    모든 기기에서 실시간으로 성과 지표를 추적할 수 있습니다.</p>
-            </div>
-            <div
-                class="relative max-w-5xl mx-auto border border-slate-300 dark:border-white/20 rounded-xl bg-white dark:bg-background-dark shadow-2xl overflow-hidden">
-                <div
-                    class="flex items-center gap-2 p-3 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900">
-                    <div class="flex gap-1.5">
-                        <div class="w-3 h-3 rounded-full bg-red-400"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-400"></div>
-                    </div>
-                    <div class="flex-1 text-center text-xs text-slate-400 font-medium">dashboard.fitmanage.com</div>
-                </div>
-                <div class="p-4 sm:p-8 bg-slate-50 dark:bg-[#0c1a14]">
-                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-                        <div
-                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
-                                전체 회원</p>
-                            <p class="text-2xl font-black text-slate-900 dark:text-white">1,284</p>
-                            <span class="text-primary text-xs font-bold">이번 달 +12%</span>
+            <!-- FeatureSection Cards -->
+            <section class="px-4 py-8 @container">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div
+                        class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                        <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">notifications_active</span>
                         </div>
-                        <div
-                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
-                                매출</p>
-                            <p class="text-2xl font-black text-slate-900 dark:text-white">₩4,250만</p>
-                            <span class="text-primary text-xs font-bold">이번 달 +5.4%</span>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
-                                오늘 방문</p>
-                            <p class="text-2xl font-black text-slate-900 dark:text-white">342</p>
-                            <span class="text-slate-400 text-xs font-bold">피크 시간: 오후 6시</span>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
-                                재등록률</p>
-                            <p class="text-2xl font-black text-slate-900 dark:text-white">94%</p>
-                            <span class="text-primary text-xs font-bold">업계 최고</span>
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">1:1 수업알림 및 일지발송
+                            </h2>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">개별 회원에게 수업
+                                알림을 보내고, 운동 일지를 자동으로 발송합니다.</p>
                         </div>
                     </div>
                     <div
-                        class="h-64 bg-slate-200 dark:bg-white/5 rounded-lg flex items-center justify-center overflow-hidden">
-                        <img class="w-full h-full object-cover opacity-80 dark:opacity-60"
-                            data-alt="Modern analytics dashboard interface showing charts"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlYm0xVWIbGt0WSx4IqrTWDF2J-MCLCrJhrMfOyVWMnjZtP66T56N3Wizoxhpa-lx-BbDWEFr6CtKo193RbFCQFhRRA_aspWlYWQ1U9F_fDin_Ru9M8Rna8QVfdqZFVyFK5VPv8hGdB5q9y6FgJgAIiJ6eHJvWXm4jyWPtWqw3Sp3gElU5DRwJ2AnrLPh_UcJjC8OrdIBC-2Eoxs08KPj3qtnOLFARZignklyqTEtk0pXtS2pFwefRYvdJ5gLCaYUT3KIYbax_GXk" />
+                        class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                        <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">payments</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">자동 결제 시스템
+                            </h2>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">정기 결제 자동화,
+                                청구서 관리, 미결제 복구 기능을 제공합니다.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                        <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">description</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">데이터기반, 회원보고서</h2>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">회원 데이터를
+                                분석하여 맞춤형 보고서를 자동 생성하고 제공합니다.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                        <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">trending_up</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">매출 관리</h2>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">센터 전체 매출 및
+                                트레이너별 매출을 실시간으로 추적하고 분석합니다.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#193328]/30 p-6 transition-all hover:border-primary/50">
+                        <div class="text-primary bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">forum</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">업무 게시판</h2>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">트레이너 간 업무
+                                공유 및 공지사항을 효율적으로 관리합니다.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Contact Form Section -->
-        <section class="px-4 py-16" id="contact-section">
-            <div class="max-w-xl mx-auto">
-                <div class="text-center mb-10">
-                    <h2 class="text-slate-900 dark:text-white text-2xl @[480px]:text-3xl font-bold leading-tight tracking-[-0.015em]">
-                        지금 시작하세요!
-                    </h2>
-                    <p class="text-slate-600 dark:text-slate-400 mt-2">
-                        아래 신청서를 작성해주시면 'FitChat 사용 설명서'를 보내드립니다.
-                    </p>
+            </section>
+            <!-- Dashboard Preview Section -->
+            <section class="px-4 py-16 bg-slate-100 dark:bg-white/5 rounded-3xl mx-4 mb-20 overflow-hidden">
+                <div class="flex flex-col items-center text-center gap-4 mb-10">
+                    <h3
+                        class="text-slate-900 dark:text-white text-2xl @[480px]:text-3xl font-bold leading-tight tracking-[-0.015em]">
+                        강력한 대시보드</h3>
+                    <p class="text-slate-600 dark:text-slate-400 max-w-2xl">비즈니스 전체를 한눈에 파악하세요.
+                        모든 기기에서 실시간으로 성과 지표를 추적할 수 있습니다.</p>
                 </div>
-                <form id="contact-form" class="flex flex-col gap-4">
-                    <!-- Name Field -->
-                    <div class="flex flex-col gap-2">
-                        <label for="name" class="text-slate-900 dark:text-white text-sm font-medium">
-                            이름 <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            required
-                            placeholder="이름을 입력하세요"
-                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        />
+                <div
+                    class="relative max-w-5xl mx-auto border border-slate-300 dark:border-white/20 rounded-xl bg-white dark:bg-background-dark shadow-2xl overflow-hidden">
+                    <div
+                        class="flex items-center gap-2 p-3 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900">
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                        </div>
+                        <div class="flex-1 text-center text-xs text-slate-400 font-medium">dashboard.fitmanage.com</div>
                     </div>
-                    <!-- Email Field -->
-                    <div class="flex flex-col gap-2">
-                        <label for="email" class="text-slate-900 dark:text-white text-sm font-medium">
-                            이메일 <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                            placeholder="이메일을 입력하세요"
-                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        />
+                    <div class="p-4 sm:p-8 bg-slate-50 dark:bg-[#0c1a14]">
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+                            <div
+                                class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                                <p
+                                    class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                    전체 회원</p>
+                                <p class="text-2xl font-black text-slate-900 dark:text-white">1,284</p>
+                                <span class="text-primary text-xs font-bold">이번 달 +12%</span>
+                            </div>
+                            <div
+                                class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                                <p
+                                    class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                    매출</p>
+                                <p class="text-2xl font-black text-slate-900 dark:text-white">₩4,250만</p>
+                                <span class="text-primary text-xs font-bold">이번 달 +5.4%</span>
+                            </div>
+                            <div
+                                class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                                <p
+                                    class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                    오늘 방문</p>
+                                <p class="text-2xl font-black text-slate-900 dark:text-white">342</p>
+                                <span class="text-slate-400 text-xs font-bold">피크 시간: 오후 6시</span>
+                            </div>
+                            <div
+                                class="bg-white dark:bg-[#193328] p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm">
+                                <p
+                                    class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
+                                    재등록률</p>
+                                <p class="text-2xl font-black text-slate-900 dark:text-white">94%</p>
+                                <span class="text-primary text-xs font-bold">업계 최고</span>
+                            </div>
+                        </div>
+                        <div
+                            class="h-64 bg-slate-200 dark:bg-white/5 rounded-lg flex items-center justify-center overflow-hidden">
+                            <img class="w-full h-full object-cover opacity-80 dark:opacity-60"
+                                data-alt="Modern analytics dashboard interface showing charts"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlYm0xVWIbGt0WSx4IqrTWDF2J-MCLCrJhrMfOyVWMnjZtP66T56N3Wizoxhpa-lx-BbDWEFr6CtKo193RbFCQFhRRA_aspWlYWQ1U9F_fDin_Ru9M8Rna8QVfdqZFVyFK5VPv8hGdB5q9y6FgJgAIiJ6eHJvWXm4jyWPtWqw3Sp3gElU5DRwJ2AnrLPh_UcJjC8OrdIBC-2Eoxs08KPj3qtnOLFARZignklyqTEtk0pXtS2pFwefRYvdJ5gLCaYUT3KIYbax_GXk" />
+                        </div>
                     </div>
-                    <!-- Phone Field -->
-                    <div class="flex flex-col gap-2">
-                        <label for="phone" class="text-slate-900 dark:text-white text-sm font-medium">
-                            연락처 <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            required
-                            placeholder="010-1234-5678"
-                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        />
-                    </div>
-                    <!-- Center Name Field -->
-                    <div class="flex flex-col gap-2">
-                        <label for="center" class="text-slate-900 dark:text-white text-sm font-medium">
-                            센터명 <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            id="center"
-                            name="center"
-                            required
-                            placeholder="센터명을 입력하세요"
-                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        />
-                    </div>
-                    <!-- Submit Button -->
-                    <button
-                        type="submit"
-                        id="submit-btn"
-                        class="w-full h-14 mt-4 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        제출하기
-                    </button>
-                    <!-- Form Message -->
-                    <div id="form-message" class="text-center text-sm font-medium hidden"></div>
-                </form>
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <!-- Final CTA -->
-        <section class="px-4 py-20 text-center flex flex-col items-center gap-8">
-            <h2 class="text-slate-900 dark:text-white text-3xl @[480px]:text-5xl font-black max-w-2xl leading-tight">
-                피트니스센터를 <span class="text-primary">'제대로'</span> 운영할 준비가 되셨나요?</h2>
-            <p class="text-slate-600 dark:text-slate-400 text-lg max-w-xl leading-relaxed">
-                FitChat은 <span class="text-slate-900 dark:text-white font-semibold">'효율적인 센터 관리'</span>는 물론,<br>
-                회원에겐 <span class="text-slate-900 dark:text-white font-semibold">'기억에 남는 관리'</span>를,<br>
-                트레이너에겐 <span class="text-slate-900 dark:text-white font-semibold">'자신의 전문성을 한 단계 끌어올릴 수 있는'</span><br>
-                <span class="text-primary font-bold">All-in-One 시스템</span>입니다.
-            </p>
-        </section>
+            <!-- Contact Form Section -->
+            <section class="px-4 py-16" id="contact-section">
+                <div class="max-w-xl mx-auto">
+                    <div class="text-center mb-10">
+                        <h2
+                            class="text-slate-900 dark:text-white text-2xl @[480px]:text-3xl font-bold leading-tight tracking-[-0.015em]">
+                            지금 시작하세요!
+                        </h2>
+                        <p class="text-slate-600 dark:text-slate-400 mt-2">
+                            아래 신청서를 작성해주시면 'FitChat 사용 설명서'를 보내드립니다.
+                        </p>
+                    </div>
+                    <form id="contact-form" class="flex flex-col gap-4">
+                        <!-- Name Field -->
+                        <div class="flex flex-col gap-2">
+                            <label for="name" class="text-slate-900 dark:text-white text-sm font-medium">
+                                이름 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="name" name="name" required placeholder="이름을 입력하세요"
+                                class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+                        </div>
+                        <!-- Email Field -->
+                        <div class="flex flex-col gap-2">
+                            <label for="email" class="text-slate-900 dark:text-white text-sm font-medium">
+                                이메일 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="이메일을 입력하세요"
+                                class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+                        </div>
+                        <!-- Phone Field -->
+                        <div class="flex flex-col gap-2">
+                            <label for="phone" class="text-slate-900 dark:text-white text-sm font-medium">
+                                연락처 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678"
+                                class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+                        </div>
+                        <!-- Center Name Field -->
+                        <div class="flex flex-col gap-2">
+                            <label for="center" class="text-slate-900 dark:text-white text-sm font-medium">
+                                센터명 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="center" name="center" required placeholder="센터명을 입력하세요"
+                                class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+                        </div>
+                        <!-- Submit Button -->
+                        <button type="submit" id="submit-btn"
+                            class="w-full h-14 mt-4 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                            제출하기
+                        </button>
+                        <!-- Form Message -->
+                        <div id="form-message" class="text-center text-sm font-medium hidden"></div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Final CTA -->
+            <section class="px-4 py-20 text-center flex flex-col items-center gap-8">
+                <h2
+                    class="text-slate-900 dark:text-white text-3xl @[480px]:text-5xl font-black max-w-2xl leading-tight">
+                    피트니스센터를 <span class="text-primary">'제대로'</span> 운영할 준비가 되셨나요?</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg max-w-xl leading-relaxed">
+                    FitChat은 <span class="text-slate-900 dark:text-white font-semibold">'효율적인 센터 관리'</span>는 물론,<br>
+                    회원에겐 <span class="text-slate-900 dark:text-white font-semibold">'기억에 남는 관리'</span>를,<br>
+                    트레이너에겐 <span class="text-slate-900 dark:text-white font-semibold">'자신의 전문성을 한 단계 끌어올릴 수
+                        있는'</span><br>
+                    <span class="text-primary font-bold">All-in-One 시스템</span>입니다.
+                </p>
+            </section>
         </div>
     </main>
     <!-- Footer -->
@@ -411,12 +399,14 @@
     <!-- AI Chatbot Widget -->
     <div id="chatbot-container">
         <!-- Chatbot Toggle Button -->
-        <button id="chatbot-toggle" class="fixed bottom-6 right-6 w-14 h-14 bg-primary rounded-full shadow-lg shadow-primary/30 flex items-center justify-center cursor-pointer transition-all hover:scale-110 active:scale-95 z-50">
+        <button id="chatbot-toggle"
+            class="fixed bottom-6 right-6 w-14 h-14 bg-primary rounded-full shadow-lg shadow-primary/30 flex items-center justify-center cursor-pointer transition-all hover:scale-110 active:scale-95 z-50">
             <span id="chatbot-icon" class="material-symbols-outlined text-background-dark text-2xl">chat</span>
         </button>
 
         <!-- Chatbot Window -->
-        <div id="chatbot-window" class="fixed bottom-24 right-6 w-[360px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-120px)] bg-white dark:bg-[#1a2e24] rounded-2xl shadow-2xl border border-slate-200 dark:border-white/10 flex flex-col overflow-hidden z-50 hidden">
+        <div id="chatbot-window"
+            class="fixed bottom-24 right-6 w-[360px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-120px)] bg-white dark:bg-[#1a2e24] rounded-2xl shadow-2xl border border-slate-200 dark:border-white/10 flex flex-col overflow-hidden z-50 hidden">
             <!-- Header -->
             <div class="bg-primary px-4 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -441,7 +431,8 @@
                         <span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
                     </div>
                     <div class="bg-slate-100 dark:bg-white/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]">
-                        <p class="text-slate-800 dark:text-white text-sm">안녕하세요! 👋 FitChat AI 도우미입니다.<br><br>피트니스 센터 관리, 기능, 가격 등 궁금한 점을 물어보세요!</p>
+                        <p class="text-slate-800 dark:text-white text-sm">안녕하세요! 👋 FitChat AI 도우미입니다.<br><br>피트니스 센터
+                            관리, 기능, 가격 등 궁금한 점을 물어보세요!</p>
                     </div>
                 </div>
             </div>
@@ -449,18 +440,11 @@
             <!-- Input Area -->
             <div class="p-4 border-t border-slate-200 dark:border-white/10">
                 <form id="chat-form" class="flex gap-2">
-                    <input
-                        type="text"
-                        id="chat-input"
-                        placeholder="메시지를 입력하세요..."
+                    <input type="text" id="chat-input" placeholder="메시지를 입력하세요..."
                         class="flex-1 h-11 px-4 rounded-full border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        autocomplete="off"
-                    />
-                    <button
-                        type="submit"
-                        id="chat-send"
-                        class="w-11 h-11 bg-primary rounded-full flex items-center justify-center transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
-                    >
+                        autocomplete="off" />
+                    <button type="submit" id="chat-send"
+                        class="w-11 h-11 bg-primary rounded-full flex items-center justify-center transition-all hover:scale-105 active:scale-95 disabled:opacity-50">
                         <span class="material-symbols-outlined text-background-dark text-xl">send</span>
                     </button>
                 </form>
@@ -471,104 +455,150 @@
 
     <!-- Particle Text Effect Script -->
     <script>
-        (function() {
-            // Particle class
-            class Particle {
-                constructor() {
-                    this.pos = { x: 0, y: 0 };
-                    this.vel = { x: 0, y: 0 };
-                    this.acc = { x: 0, y: 0 };
-                    this.target = { x: 0, y: 0 };
-                    this.closeEnoughTarget = 100;
-                    this.maxSpeed = 1.0;
-                    this.maxForce = 0.1;
-                    this.particleSize = 10;
-                    this.isKilled = false;
-                    this.startColor = { r: 0, g: 0, b: 0 };
-                    this.targetColor = { r: 0, g: 0, b: 0 };
-                    this.colorWeight = 0;
-                    this.colorBlendRate = 0.01;
-                }
-
-                move() {
-                    let proximityMult = 1;
-                    const distance = Math.sqrt(
-                        Math.pow(this.pos.x - this.target.x, 2) +
-                        Math.pow(this.pos.y - this.target.y, 2)
-                    );
-
-                    if (distance < this.closeEnoughTarget) {
-                        proximityMult = distance / this.closeEnoughTarget;
-                    }
-
-                    const towardsTarget = {
-                        x: this.target.x - this.pos.x,
-                        y: this.target.y - this.pos.y,
-                    };
-
-                    const magnitude = Math.sqrt(towardsTarget.x * towardsTarget.x + towardsTarget.y * towardsTarget.y);
-                    if (magnitude > 0) {
-                        towardsTarget.x = (towardsTarget.x / magnitude) * this.maxSpeed * proximityMult;
-                        towardsTarget.y = (towardsTarget.y / magnitude) * this.maxSpeed * proximityMult;
-                    }
-
-                    const steer = {
-                        x: towardsTarget.x - this.vel.x,
-                        y: towardsTarget.y - this.vel.y,
-                    };
-
-                    const steerMagnitude = Math.sqrt(steer.x * steer.x + steer.y * steer.y);
-                    if (steerMagnitude > 0) {
-                        steer.x = (steer.x / steerMagnitude) * this.maxForce;
-                        steer.y = (steer.y / steerMagnitude) * this.maxForce;
-                    }
-
-                    this.acc.x += steer.x;
-                    this.acc.y += steer.y;
-
-                    this.vel.x += this.acc.x;
-                    this.vel.y += this.acc.y;
-                    this.pos.x += this.vel.x;
-                    this.pos.y += this.vel.y;
-                    this.acc.x = 0;
-                    this.acc.y = 0;
-                }
-
-                draw(ctx) {
-                    if (this.colorWeight < 1.0) {
-                        this.colorWeight = Math.min(this.colorWeight + this.colorBlendRate, 1.0);
-                    }
-
-                    const currentColor = {
-                        r: Math.round(this.startColor.r + (this.targetColor.r - this.startColor.r) * this.colorWeight),
-                        g: Math.round(this.startColor.g + (this.targetColor.g - this.startColor.g) * this.colorWeight),
-                        b: Math.round(this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight),
-                    };
-
-                    ctx.fillStyle = `rgb(${currentColor.r}, ${currentColor.g}, ${currentColor.b})`;
-                    ctx.fillRect(this.pos.x, this.pos.y, 2, 2);
-                }
-
-                kill(width, height) {
-                    if (!this.isKilled) {
-                        const randomPos = this.generateRandomPos(width / 2, height / 2, (width + height) / 2);
-                        this.target.x = randomPos.x;
-                        this.target.y = randomPos.y;
-
-                        this.startColor = {
-                            r: this.startColor.r + (this.targetColor.r - this.startColor.r) * this.colorWeight,
-                            g: this.startColor.g + (this.targetColor.g - this.startColor.g) * this.colorWeight,
-                            b: this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight,
-                        };
+            (function () {
+                // Particle class
+                class Particle {
+                    constructor() {
+                        this.pos = { x: 0, y: 0 };
+                        this.vel = { x: 0, y: 0 };
+                        this.acc = { x: 0, y: 0 };
+                        this.target = { x: 0, y: 0 };
+                        this.closeEnoughTarget = 100;
+                        this.maxSpeed = 1.0;
+                        this.maxForce = 0.1;
+                        this.particleSize = 10;
+                        this.isKilled = false;
+                        this.startColor = { r: 0, g: 0, b: 0 };
                         this.targetColor = { r: 0, g: 0, b: 0 };
                         this.colorWeight = 0;
-                        this.isKilled = true;
+                        this.colorBlendRate = 0.01;
+                    }
+
+                    move() {
+                        let proximityMult = 1;
+                        const distance = Math.sqrt(
+                            Math.pow(this.pos.x - this.target.x, 2) +
+                            Math.pow(this.pos.y - this.target.y, 2)
+                        );
+
+                        if (distance < this.closeEnoughTarget) {
+                            proximityMult = distance / this.closeEnoughTarget;
+                        }
+
+                        const towardsTarget = {
+                            x: this.target.x - this.pos.x,
+                            y: this.target.y - this.pos.y,
+                        };
+
+                        const magnitude = Math.sqrt(towardsTarget.x * towardsTarget.x + towardsTarget.y * towardsTarget.y);
+                        if (magnitude > 0) {
+                            towardsTarget.x = (towardsTarget.x / magnitude) * this.maxSpeed * proximityMult;
+                            towardsTarget.y = (towardsTarget.y / magnitude) * this.maxSpeed * proximityMult;
+                        }
+
+                        const steer = {
+                            x: towardsTarget.x - this.vel.x,
+                            y: towardsTarget.y - this.vel.y,
+                        };
+
+                        const steerMagnitude = Math.sqrt(steer.x * steer.x + steer.y * steer.y);
+                        if (steerMagnitude > 0) {
+                            steer.x = (steer.x / steerMagnitude) * this.maxForce;
+                            steer.y = (steer.y / steerMagnitude) * this.maxForce;
+                        }
+
+                        this.acc.x += steer.x;
+                        this.acc.y += steer.y;
+
+                        this.vel.x += this.acc.x;
+                        this.vel.y += this.acc.y;
+                        this.pos.x += this.vel.x;
+                        this.pos.y += this.vel.y;
+                        this.acc.x = 0;
+                        this.acc.y = 0;
+                    }
+
+                    draw(ctx) {
+                        if (this.colorWeight < 1.0) {
+                            this.colorWeight = Math.min(this.colorWeight + this.colorBlendRate, 1.0);
+                        }
+
+                        const currentColor = {
+                            r: Math.round(this.startColor.r + (this.targetColor.r - this.startColor.r) * this.colorWeight),
+                            g: Math.round(this.startColor.g + (this.targetColor.g - this.startColor.g) * this.colorWeight),
+                            b: Math.round(this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight),
+                        };
+
+                        ctx.fillStyle = `rgb(${currentColor.r}, ${currentColor.g}, ${currentColor.b})`;
+                        ctx.fillRect(this.pos.x, this.pos.y, 2, 2);
+                    }
+
+                    kill(width, height) {
+                        if (!this.isKilled) {
+                            const randomPos = this.generateRandomPos(width / 2, height / 2, (width + height) / 2);
+                            this.target.x = randomPos.x;
+                            this.target.y = randomPos.y;
+
+                            this.startColor = {
+                                r: this.startColor.r + (this.targetColor.r - this.startColor.r) * this.colorWeight,
+                                g: this.startColor.g + (this.targetColor.g - this.startColor.g) * this.colorWeight,
+                                b: this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight,
+                            };
+                            this.targetColor = { r: 0, g: 0, b: 0 };
+                            this.colorWeight = 0;
+                            this.isKilled = true;
+                        }
+                    }
+
+                    generateRandomPos(x, y, mag) {
+                        const randomX = Math.random() * 1000;
+                        const randomY = Math.random() * 500;
+
+                        const direction = {
+                            x: randomX - x,
+                            y: randomY - y,
+                        };
+
+                        const magnitude = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
+                        if (magnitude > 0) {
+                            direction.x = (direction.x / magnitude) * mag;
+                            direction.y = (direction.y / magnitude) * mag;
+                        }
+
+                        return {
+                            x: x + direction.x,
+                            y: y + direction.y,
+                        };
                     }
                 }
 
-                generateRandomPos(x, y, mag) {
-                    const randomX = Math.random() * 1000;
-                    const randomY = Math.random() * 500;
+                // Main initialization
+                const canvas = document.getElementById('particle-canvas');
+                if (!canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                const particles = [];
+                let frameCount = 0;
+                let wordIndex = 0;
+                let animationId;
+
+                // FitChat themed words (Korean)
+                const words = ["FitChat", "성장하세요", "성공하세요", "관리하세요", "피트니스"];
+                const pixelSteps = 6;
+
+                // Set canvas size
+                function resizeCanvas() {
+                    const container = document.getElementById('particle-hero');
+                    canvas.width = Math.min(1000, window.innerWidth - 32);
+                    canvas.height = Math.min(500, window.innerHeight * 0.6);
+                }
+
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                function generateRandomPos(x, y, mag) {
+                    const randomX = Math.random() * canvas.width;
+                    const randomY = Math.random() * canvas.height;
 
                     const direction = {
                         x: randomX - x,
@@ -586,196 +616,150 @@
                         y: y + direction.y,
                     };
                 }
-            }
 
-            // Main initialization
-            const canvas = document.getElementById('particle-canvas');
-            if (!canvas) return;
+                function nextWord(word) {
+                    const offscreenCanvas = document.createElement('canvas');
+                    offscreenCanvas.width = canvas.width;
+                    offscreenCanvas.height = canvas.height;
+                    const offscreenCtx = offscreenCanvas.getContext('2d');
 
-            const ctx = canvas.getContext('2d');
-            const particles = [];
-            let frameCount = 0;
-            let wordIndex = 0;
-            let animationId;
+                    // Dynamic font size based on canvas width
+                    const fontSize = Math.min(100, canvas.width / 8);
 
-            // FitChat themed words (Korean)
-            const words = ["FitChat", "성장하세요", "관리하세요", "성공하세요", "피트니스"];
-            const pixelSteps = 6;
+                    offscreenCtx.fillStyle = 'white';
+                    offscreenCtx.font = `bold ${fontSize}px Inter, Arial, sans-serif`;
+                    offscreenCtx.textAlign = 'center';
+                    offscreenCtx.textBaseline = 'middle';
+                    offscreenCtx.fillText(word, canvas.width / 2, canvas.height / 2);
 
-            // Set canvas size
-            function resizeCanvas() {
-                const container = document.getElementById('particle-hero');
-                canvas.width = Math.min(1000, window.innerWidth - 32);
-                canvas.height = Math.min(500, window.innerHeight * 0.6);
-            }
+                    const imageData = offscreenCtx.getImageData(0, 0, canvas.width, canvas.height);
+                    const pixels = imageData.data;
 
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
+                    // Generate primary color (#13ec92) with variations
+                    const newColor = {
+                        r: 19 + Math.random() * 50,
+                        g: 200 + Math.random() * 55,
+                        b: 100 + Math.random() * 50,
+                    };
 
-            function generateRandomPos(x, y, mag) {
-                const randomX = Math.random() * canvas.width;
-                const randomY = Math.random() * canvas.height;
+                    let particleIndex = 0;
 
-                const direction = {
-                    x: randomX - x,
-                    y: randomY - y,
-                };
+                    const coordsIndexes = [];
+                    for (let i = 0; i < pixels.length; i += pixelSteps * 4) {
+                        coordsIndexes.push(i);
+                    }
 
-                const magnitude = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
-                if (magnitude > 0) {
-                    direction.x = (direction.x / magnitude) * mag;
-                    direction.y = (direction.y / magnitude) * mag;
-                }
+                    // Shuffle for fluid motion
+                    for (let i = coordsIndexes.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [coordsIndexes[i], coordsIndexes[j]] = [coordsIndexes[j], coordsIndexes[i]];
+                    }
 
-                return {
-                    x: x + direction.x,
-                    y: y + direction.y,
-                };
-            }
+                    for (const coordIndex of coordsIndexes) {
+                        const pixelIndex = coordIndex;
+                        const alpha = pixels[pixelIndex + 3];
 
-            function nextWord(word) {
-                const offscreenCanvas = document.createElement('canvas');
-                offscreenCanvas.width = canvas.width;
-                offscreenCanvas.height = canvas.height;
-                const offscreenCtx = offscreenCanvas.getContext('2d');
+                        if (alpha > 0) {
+                            const x = (pixelIndex / 4) % canvas.width;
+                            const y = Math.floor(pixelIndex / 4 / canvas.width);
 
-                // Dynamic font size based on canvas width
-                const fontSize = Math.min(100, canvas.width / 8);
+                            let particle;
 
-                offscreenCtx.fillStyle = 'white';
-                offscreenCtx.font = `bold ${fontSize}px Inter, Arial, sans-serif`;
-                offscreenCtx.textAlign = 'center';
-                offscreenCtx.textBaseline = 'middle';
-                offscreenCtx.fillText(word, canvas.width / 2, canvas.height / 2);
+                            if (particleIndex < particles.length) {
+                                particle = particles[particleIndex];
+                                particle.isKilled = false;
+                                particleIndex++;
+                            } else {
+                                particle = new Particle();
 
-                const imageData = offscreenCtx.getImageData(0, 0, canvas.width, canvas.height);
-                const pixels = imageData.data;
+                                const randomPos = generateRandomPos(canvas.width / 2, canvas.height / 2, (canvas.width + canvas.height) / 2);
+                                particle.pos.x = randomPos.x;
+                                particle.pos.y = randomPos.y;
 
-                // Generate primary color (#13ec92) with variations
-                const newColor = {
-                    r: 19 + Math.random() * 50,
-                    g: 200 + Math.random() * 55,
-                    b: 100 + Math.random() * 50,
-                };
+                                particle.maxSpeed = Math.random() * 6 + 4;
+                                particle.maxForce = particle.maxSpeed * 0.05;
+                                particle.particleSize = Math.random() * 6 + 6;
+                                particle.colorBlendRate = Math.random() * 0.0275 + 0.0025;
 
-                let particleIndex = 0;
+                                particles.push(particle);
+                            }
 
-                const coordsIndexes = [];
-                for (let i = 0; i < pixels.length; i += pixelSteps * 4) {
-                    coordsIndexes.push(i);
-                }
+                            particle.startColor = {
+                                r: particle.startColor.r + (particle.targetColor.r - particle.startColor.r) * particle.colorWeight,
+                                g: particle.startColor.g + (particle.targetColor.g - particle.startColor.g) * particle.colorWeight,
+                                b: particle.startColor.b + (particle.targetColor.b - particle.startColor.b) * particle.colorWeight,
+                            };
+                            particle.targetColor = newColor;
+                            particle.colorWeight = 0;
 
-                // Shuffle for fluid motion
-                for (let i = coordsIndexes.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [coordsIndexes[i], coordsIndexes[j]] = [coordsIndexes[j], coordsIndexes[i]];
-                }
-
-                for (const coordIndex of coordsIndexes) {
-                    const pixelIndex = coordIndex;
-                    const alpha = pixels[pixelIndex + 3];
-
-                    if (alpha > 0) {
-                        const x = (pixelIndex / 4) % canvas.width;
-                        const y = Math.floor(pixelIndex / 4 / canvas.width);
-
-                        let particle;
-
-                        if (particleIndex < particles.length) {
-                            particle = particles[particleIndex];
-                            particle.isKilled = false;
-                            particleIndex++;
-                        } else {
-                            particle = new Particle();
-
-                            const randomPos = generateRandomPos(canvas.width / 2, canvas.height / 2, (canvas.width + canvas.height) / 2);
-                            particle.pos.x = randomPos.x;
-                            particle.pos.y = randomPos.y;
-
-                            particle.maxSpeed = Math.random() * 6 + 4;
-                            particle.maxForce = particle.maxSpeed * 0.05;
-                            particle.particleSize = Math.random() * 6 + 6;
-                            particle.colorBlendRate = Math.random() * 0.0275 + 0.0025;
-
-                            particles.push(particle);
+                            particle.target.x = x;
+                            particle.target.y = y;
                         }
+                    }
 
-                        particle.startColor = {
-                            r: particle.startColor.r + (particle.targetColor.r - particle.startColor.r) * particle.colorWeight,
-                            g: particle.startColor.g + (particle.targetColor.g - particle.startColor.g) * particle.colorWeight,
-                            b: particle.startColor.b + (particle.targetColor.b - particle.startColor.b) * particle.colorWeight,
-                        };
-                        particle.targetColor = newColor;
-                        particle.colorWeight = 0;
-
-                        particle.target.x = x;
-                        particle.target.y = y;
+                    // Kill remaining particles
+                    for (let i = particleIndex; i < particles.length; i++) {
+                        particles[i].kill(canvas.width, canvas.height);
                     }
                 }
 
-                // Kill remaining particles
-                for (let i = particleIndex; i < particles.length; i++) {
-                    particles[i].kill(canvas.width, canvas.height);
-                }
-            }
+                function animate() {
+                    // Background with motion blur
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            function animate() {
-                // Background with motion blur
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    // Update and draw particles
+                    for (let i = particles.length - 1; i >= 0; i--) {
+                        const particle = particles[i];
+                        particle.move();
+                        particle.draw(ctx);
 
-                // Update and draw particles
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const particle = particles[i];
-                    particle.move();
-                    particle.draw(ctx);
-
-                    // Remove dead particles
-                    if (particle.isKilled) {
-                        if (
-                            particle.pos.x < 0 ||
-                            particle.pos.x > canvas.width ||
-                            particle.pos.y < 0 ||
-                            particle.pos.y > canvas.height
-                        ) {
-                            particles.splice(i, 1);
+                        // Remove dead particles
+                        if (particle.isKilled) {
+                            if (
+                                particle.pos.x < 0 ||
+                                particle.pos.x > canvas.width ||
+                                particle.pos.y < 0 ||
+                                particle.pos.y > canvas.height
+                            ) {
+                                particles.splice(i, 1);
+                            }
                         }
                     }
+
+                    // Auto-advance words every 4 seconds (240 frames at 60fps)
+                    frameCount++;
+                    if (frameCount % 240 === 0) {
+                        wordIndex = (wordIndex + 1) % words.length;
+                        nextWord(words[wordIndex]);
+                    }
+
+                    animationId = requestAnimationFrame(animate);
                 }
 
-                // Auto-advance words every 4 seconds (240 frames at 60fps)
-                frameCount++;
-                if (frameCount % 240 === 0) {
-                    wordIndex = (wordIndex + 1) % words.length;
-                    nextWord(words[wordIndex]);
-                }
+                // Start
+                nextWord(words[0]);
+                animate();
 
-                animationId = requestAnimationFrame(animate);
-            }
-
-            // Start
-            nextWord(words[0]);
-            animate();
-
-            // Cleanup on page unload
-            window.addEventListener('beforeunload', () => {
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                }
-            });
-        })();
+                // Cleanup on page unload
+                window.addEventListener('beforeunload', () => {
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                    }
+                });
+            })();
     </script>
 
     <!-- Contact Form Script -->
     <script>
-        (function() {
+        (function () {
             const form = document.getElementById('contact-form');
             const submitBtn = document.getElementById('submit-btn');
             const formMessage = document.getElementById('form-message');
 
             if (!form) return;
 
-            form.addEventListener('submit', async function(e) {
+            form.addEventListener('submit', async function (e) {
                 e.preventDefault();
 
                 // Get form data
@@ -848,7 +832,7 @@
 
     <!-- AI Chatbot Script (Gemini API) -->
     <script>
-        (function() {
+        (function () {
             const GEMINI_API_KEY = 'AIzaSyAwZ6g01fi8yNZXNDSavkbcNsJov7IO2CI';
             const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 

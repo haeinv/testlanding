@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>회사소개 - FitChat</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FitChat은 피트니스 센터의 효율적인 운영을 위한 All-in-One 관리 시스템입니다. 회사 소개 및 비전을 확인하세요." />
+    <meta name="keywords" content="피트니스 관리, 헬스장 관리, PT 관리, 센터 관리 프로그램, FitChat, 핏챗, 회사소개" />
+    <meta name="author" content="FitChat" />
+    <meta name="robots" content="index, follow" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/10">
+        <div class="flex items-center p-4 justify-between max-w-7xl mx-auto">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="text-primary flex size-8 items-center justify-center">
+                    <span class="material-symbols-outlined text-3xl">fitness_center</span>
+                </div>
+                <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">FitChat</h2>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="about.html" class="text-primary text-sm font-bold hover:text-primary transition-colors hidden sm:block">회사소개</a>
+                <a href="index.html#contact" class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors hidden sm:block">회원가입</a>
+                <p class="text-primary text-sm font-bold leading-normal tracking-[0.015em] hidden sm:block">로그인</p>
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-400 sm:hidden">menu</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        <!-- Hero Section -->
+        <section class="text-center mb-20">
+            <h1 class="text-slate-900 dark:text-white text-4xl sm:text-5xl font-black mb-6">
+                피트니스의 <span class="text-primary">새로운 기준</span>을 만듭니다
+            </h1>
+            <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                FitChat은 피트니스 센터 운영의 모든 복잡함을 단순하게 만들어,<br>
+                트레이너와 회원 모두가 운동에만 집중할 수 있는 환경을 제공합니다.
+            </p>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mb-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-slate-900 dark:text-white text-3xl font-bold mb-6">우리의 미션</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-4">
+                        피트니스 센터 운영자와 트레이너들이 행정 업무에 쏟는 시간을 최소화하고,
+                        회원들에게 더 나은 서비스를 제공할 수 있도록 돕는 것이 FitChat의 미션입니다.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                        우리는 기술을 통해 피트니스 산업의 디지털 전환을 선도하며,
+                        모든 규모의 센터가 전문적인 관리 시스템을 활용할 수 있도록 합니다.
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl p-8 border border-primary/20">
+                    <div class="text-primary text-6xl font-black mb-4">2024</div>
+                    <p class="text-slate-900 dark:text-white text-xl font-bold mb-2">FitChat 설립</p>
+                    <p class="text-slate-600 dark:text-slate-400">피트니스 센터 관리의 새로운 패러다임을 열다</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="mb-20">
+            <h2 class="text-slate-900 dark:text-white text-3xl font-bold mb-10 text-center">핵심 가치</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-8 border border-slate-200 dark:border-white/10">
+                    <div class="text-primary bg-primary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">speed</span>
+                    </div>
+                    <h3 class="text-slate-900 dark:text-white text-xl font-bold mb-3">효율성</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        복잡한 업무를 자동화하여 센터 운영에 필요한 시간과 노력을 최소화합니다.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-8 border border-slate-200 dark:border-white/10">
+                    <div class="text-primary bg-primary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">favorite</span>
+                    </div>
+                    <h3 class="text-slate-900 dark:text-white text-xl font-bold mb-3">회원 중심</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        회원에게 기억에 남는 경험을 제공하여 장기적인 관계를 구축합니다.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-8 border border-slate-200 dark:border-white/10">
+                    <div class="text-primary bg-primary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-3xl">trending_up</span>
+                    </div>
+                    <h3 class="text-slate-900 dark:text-white text-xl font-bold mb-3">성장</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        트레이너의 전문성 향상과 센터의 지속적인 성장을 지원합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Summary -->
+        <section class="mb-20">
+            <h2 class="text-slate-900 dark:text-white text-3xl font-bold mb-10 text-center">FitChat이 제공하는 것</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex items-start gap-4 p-6 bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                    <div>
+                        <h3 class="text-slate-900 dark:text-white font-bold mb-1">통합 회원 관리</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">회원 정보, 출석, 결제 내역을 한 곳에서 관리</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                    <div>
+                        <h3 class="text-slate-900 dark:text-white font-bold mb-1">자동 결제 시스템</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">정기 결제 및 미수금 관리 자동화</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                    <div>
+                        <h3 class="text-slate-900 dark:text-white font-bold mb-1">PT 스케줄 관리</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">트레이너와 회원 간 일정 조율 간소화</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                    <div>
+                        <h3 class="text-slate-900 dark:text-white font-bold mb-1">실시간 대시보드</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">센터 운영 현황을 한눈에 파악</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                    <div>
+                        <h3 class="text-slate-900 dark:text-white font-bold mb-1">업무 게시판</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">트레이너 간 효율적인 업무 공유</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                    <div>
+                        <h3 class="text-slate-900 dark:text-white font-bold mb-1">AI 상담 챗봇</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">24시간 회원 문의 응대 자동화</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="text-center bg-gradient-to-br from-primary/10 to-transparent rounded-2xl p-12 border border-primary/20">
+            <h2 class="text-slate-900 dark:text-white text-3xl font-bold mb-4">
+                FitChat과 함께 시작하세요
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg mb-8 max-w-xl mx-auto">
+                지금 바로 FitChat 사용 설명서를 받아보시고,<br>
+                센터 관리의 새로운 경험을 시작하세요.
+            </p>
+            <a href="index.html#contact" class="inline-flex items-center gap-2 bg-primary text-black font-bold px-8 py-4 rounded-lg hover:bg-primary/90 transition-colors">
+                <span>자료 신청하기</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-white/10 mt-20">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">fitness_center</span>
+                    <span class="text-slate-900 dark:text-white font-bold">FitChat</span>
+                </div>
+                <p class="text-slate-500 text-sm">&copy; 2024 FitChat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
