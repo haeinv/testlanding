@@ -16,6 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -183,21 +189,108 @@
         </div>
     </footer>
 
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
     <script>
+        // Check if already logged in
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+
         // Form submission handler
-        document.getElementById('login-form').addEventListener('submit', function(e) {
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
 
             if (!email || !password) {
                 alert('이메일과 비밀번호를 입력해주세요.');
                 return;
             }
 
-            // For now, show demo message
-            alert('로그인 기능은 현재 준비 중입니다.\n빠른 시일 내에 서비스를 제공하겠습니다.');
+            // Show loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 처리중...';
+            submitBtn.disabled = true;
+
+            // Set persistence based on remember checkbox
+            const persistence = remember ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
+            await auth.setPersistence(persistence);
+
+            // Firebase login
+            const result = await signInWithEmail(email, password);
+
+            if (result.success) {
+                window.location.href = 'dashboard.html';
+            } else {
+                let errorMessage = '로그인 중 오류가 발생했습니다.';
+                if (result.error.includes('user-not-found')) {
+                    errorMessage = '등록되지 않은 이메일입니다.';
+                } else if (result.error.includes('wrong-password')) {
+                    errorMessage = '비밀번호가 올바르지 않습니다.';
+                } else if (result.error.includes('invalid-credential')) {
+                    errorMessage = '이메일 또는 비밀번호가 올바르지 않습니다.';
+                } else if (result.error.includes('too-many-requests')) {
+                    errorMessage = '로그인 시도가 너무 많습니다. 잠시 후 다시 시도해주세요.';
+                }
+                alert(errorMessage);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Google login
+        document.querySelector('button:has(svg path[fill="#4285F4"])').addEventListener('click', async function() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+
+                // Check if user exists in Firestore
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                if (!userDoc.exists) {
+                    await db.collection('users').doc(user.uid).set({
+                        email: user.email,
+                        name: user.displayName || '',
+                        phone: '',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        subscription: null,
+                        centerName: ''
+                    });
+                }
+
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                console.error('Google login error:', error);
+                if (error.code !== 'auth/popup-closed-by-user') {
+                    alert('Google 로그인 중 오류가 발생했습니다.');
+                }
+            }
+        });
+
+        // Password reset
+        document.querySelector('a[href="#"]').addEventListener('click', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            if (!email) {
+                alert('비밀번호를 재설정할 이메일을 입력해주세요.');
+                return;
+            }
+            try {
+                await auth.sendPasswordResetEmail(email);
+                alert('비밀번호 재설정 이메일을 발송했습니다.\n이메일을 확인해주세요.');
+            } catch (error) {
+                if (error.code === 'auth/user-not-found') {
+                    alert('등록되지 않은 이메일입니다.');
+                } else {
+                    alert('이메일 발송 중 오류가 발생했습니다.');
+                }
+            }
         });
     </script>
 </body>

@@ -4,3 +4,4 @@ data/screenshot.png
 
 # API 키 설정 파일 (외부 노출 방지)
 config.js
+firebase-config.js

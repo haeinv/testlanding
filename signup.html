@@ -16,6 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -263,11 +269,16 @@
         </div>
     </footer>
 
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
     <script>
         // Form submission handler
-        document.getElementById('signup-form').addEventListener('submit', function(e) {
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
             const password = document.getElementById('password').value;
             const passwordConfirm = document.getElementById('passwordConfirm').value;
 
@@ -287,9 +298,63 @@
                 return;
             }
 
-            // For now, show success message
-            alert('회원가입이 완료되었습니다!\n담당자가 확인 후 연락드리겠습니다.');
-            this.reset();
+            // Show loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 처리중...';
+            submitBtn.disabled = true;
+
+            // Firebase signup
+            const result = await signUpWithEmail(email, password, name, phone);
+
+            if (result.success) {
+                alert('회원가입이 완료되었습니다!\n로그인 페이지로 이동합니다.');
+                window.location.href = 'login.html';
+            } else {
+                // Error handling
+                let errorMessage = '회원가입 중 오류가 발생했습니다.';
+                if (result.error.includes('email-already-in-use')) {
+                    errorMessage = '이미 사용 중인 이메일입니다.';
+                } else if (result.error.includes('invalid-email')) {
+                    errorMessage = '유효하지 않은 이메일 형식입니다.';
+                } else if (result.error.includes('weak-password')) {
+                    errorMessage = '비밀번호가 너무 약합니다.';
+                }
+                alert(errorMessage);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Google signup
+        document.querySelector('button:has(svg path[fill="#4285F4"])').addEventListener('click', async function() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+
+                // Check if user exists in Firestore
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                if (!userDoc.exists) {
+                    // Create new user document
+                    await db.collection('users').doc(user.uid).set({
+                        email: user.email,
+                        name: user.displayName || '',
+                        phone: '',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        subscription: null,
+                        centerName: ''
+                    });
+                }
+
+                alert('Google 계정으로 가입되었습니다!');
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                console.error('Google signup error:', error);
+                if (error.code !== 'auth/popup-closed-by-user') {
+                    alert('Google 로그인 중 오류가 발생했습니다.');
+                }
+            }
         });
     </script>
 </body>

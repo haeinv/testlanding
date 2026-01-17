@@ -10,6 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -59,8 +65,8 @@
                         <span class="material-symbols-outlined text-primary">person</span>
                     </div>
                     <div>
-                        <p class="text-slate-900 dark:text-white font-medium text-sm">김민수</p>
-                        <p class="text-slate-500 text-xs">minsu@email.com</p>
+                        <p id="sidebar-user-name" class="text-slate-900 dark:text-white font-medium text-sm">로딩중...</p>
+                        <p id="sidebar-user-email" class="text-slate-500 text-xs">-</p>
                     </div>
                 </div>
             </div>
@@ -142,19 +148,19 @@
                             <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <p class="text-slate-500 text-sm mb-1">이름</p>
-                                    <p class="text-slate-900 dark:text-white font-medium">김민수</p>
+                                    <p id="profile-name" class="text-slate-900 dark:text-white font-medium">-</p>
                                 </div>
                                 <div>
                                     <p class="text-slate-500 text-sm mb-1">이메일</p>
-                                    <p class="text-slate-900 dark:text-white font-medium">minsu@email.com</p>
+                                    <p id="profile-email" class="text-slate-900 dark:text-white font-medium">-</p>
                                 </div>
                                 <div>
                                     <p class="text-slate-500 text-sm mb-1">연락처</p>
-                                    <p class="text-slate-900 dark:text-white font-medium">010-1234-5678</p>
+                                    <p id="profile-phone" class="text-slate-900 dark:text-white font-medium">-</p>
                                 </div>
                                 <div>
                                     <p class="text-slate-500 text-sm mb-1">가입일</p>
-                                    <p class="text-slate-900 dark:text-white font-medium">2024년 1월 10일</p>
+                                    <p id="profile-joined" class="text-slate-900 dark:text-white font-medium">-</p>
                                 </div>
                             </div>
                             <button class="px-4 py-2 text-primary border border-primary rounded-lg hover:bg-primary/10 transition-colors text-sm font-medium">
@@ -203,22 +209,22 @@
                             <span class="text-slate-500 text-sm">총 결제금액</span>
                             <span class="material-symbols-outlined text-primary">payments</span>
                         </div>
-                        <p class="text-slate-900 dark:text-white text-3xl font-bold">150,000<span class="text-lg">원</span></p>
+                        <p id="stat-total-payment" class="text-slate-900 dark:text-white text-3xl font-bold">0<span class="text-lg">원</span></p>
                     </div>
                     <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
                         <div class="flex items-center justify-between mb-3">
                             <span class="text-slate-500 text-sm">구매 프로그램</span>
                             <span class="material-symbols-outlined text-primary">inventory_2</span>
                         </div>
-                        <p class="text-slate-900 dark:text-white text-3xl font-bold">2<span class="text-lg">개</span></p>
+                        <p id="stat-purchase-count" class="text-slate-900 dark:text-white text-3xl font-bold">0<span class="text-lg">개</span></p>
                     </div>
                     <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
                         <div class="flex items-center justify-between mb-3">
                             <span class="text-slate-500 text-sm">이용 상태</span>
                             <span class="material-symbols-outlined text-primary">verified</span>
                         </div>
-                        <p class="text-primary text-xl font-bold">이용중</p>
-                        <p class="text-slate-500 text-xs mt-1">Pro 플랜</p>
+                        <p id="stat-status" class="text-slate-500 text-xl font-bold">미구독</p>
+                        <p id="stat-plan" class="text-slate-500 text-xs mt-1">-</p>
                     </div>
                 </div>
 
@@ -321,17 +327,130 @@
             </div>
         </main>
     </div>
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
     <script>
-        // Load saved center name from localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedCenterName = localStorage.getItem('centerName');
-            if (savedCenterName) {
-                document.getElementById('center-name').value = savedCenterName;
+        let currentUser = null;
+        let userData = null;
+
+        // Check authentication
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                await loadUserData();
+            } else {
+                // Not logged in, redirect to login
+                window.location.href = 'login.html';
             }
         });
 
+        // Load user data from Firestore
+        async function loadUserData() {
+            try {
+                const result = await getUserData(currentUser.uid);
+                if (result.success) {
+                    userData = result.data;
+                    updateUI();
+                    loadPaymentHistory();
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        // Update UI with user data
+        function updateUI() {
+            // Sidebar
+            document.getElementById('sidebar-user-name').textContent = userData.name || currentUser.displayName || '사용자';
+            document.getElementById('sidebar-user-email').textContent = userData.email || currentUser.email;
+
+            // Profile section
+            document.getElementById('profile-name').textContent = userData.name || currentUser.displayName || '-';
+            document.getElementById('profile-email').textContent = userData.email || currentUser.email;
+            document.getElementById('profile-phone').textContent = userData.phone || '-';
+
+            // Joined date
+            if (userData.createdAt) {
+                const date = userData.createdAt.toDate();
+                document.getElementById('profile-joined').textContent = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+            }
+
+            // Center name
+            if (userData.centerName) {
+                document.getElementById('center-name').value = userData.centerName;
+            }
+
+            // Subscription status
+            if (userData.subscription && userData.subscription.status === 'active') {
+                document.getElementById('stat-status').textContent = '이용중';
+                document.getElementById('stat-status').className = 'text-primary text-xl font-bold';
+                document.getElementById('stat-plan').textContent = userData.subscription.plan;
+            }
+        }
+
+        // Load payment history
+        async function loadPaymentHistory() {
+            try {
+                const snapshot = await db.collection('payments')
+                    .where('userId', '==', currentUser.uid)
+                    .orderBy('createdAt', 'desc')
+                    .get();
+
+                const payments = [];
+                let totalAmount = 0;
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    payments.push({ id: doc.id, ...data });
+                    totalAmount += data.amount || 0;
+                });
+
+                // Update stats
+                document.getElementById('stat-total-payment').innerHTML = `${totalAmount.toLocaleString()}<span class="text-lg">원</span>`;
+                document.getElementById('stat-purchase-count').innerHTML = `${payments.length}<span class="text-lg">개</span>`;
+
+                // Update payment history table
+                const tbody = document.querySelector('table tbody');
+                if (payments.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="px-6 py-8 text-center text-slate-500">
+                                결제 내역이 없습니다.
+                            </td>
+                        </tr>
+                    `;
+                } else {
+                    tbody.innerHTML = payments.map(payment => {
+                        const date = payment.createdAt ? payment.createdAt.toDate() : new Date();
+                        const dateStr = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                        return `
+                            <tr class="hover:bg-slate-50 dark:hover:bg-white/5">
+                                <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">${payment.orderId || '-'}</td>
+                                <td class="px-6 py-4">
+                                    <div>
+                                        <p class="text-slate-900 dark:text-white font-medium">${payment.planName || '-'}</p>
+                                        <p class="text-slate-500 text-xs">월간 구독</p>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">${(payment.amount || 0).toLocaleString()}원</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-400">${dateStr}</td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium rounded-full">${payment.status || '결제완료'}</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button class="text-primary hover:underline text-sm">영수증</button>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+                }
+            } catch (error) {
+                console.error('Error loading payments:', error);
+            }
+        }
+
         // Save center name
-        document.getElementById('center-form').addEventListener('submit', function(e) {
+        document.getElementById('center-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const centerName = document.getElementById('center-name').value.trim();
@@ -341,17 +460,27 @@
                 return;
             }
 
-            // Save to localStorage
-            localStorage.setItem('centerName', centerName);
+            // Save to Firestore
+            const result = await saveCenterName(currentUser.uid, centerName);
 
-            // Show success message
-            const savedMessage = document.getElementById('center-saved');
-            savedMessage.classList.remove('hidden');
+            if (result.success) {
+                // Show success message
+                const savedMessage = document.getElementById('center-saved');
+                savedMessage.classList.remove('hidden');
 
-            // Hide message after 3 seconds
-            setTimeout(function() {
-                savedMessage.classList.add('hidden');
-            }, 3000);
+                // Hide message after 3 seconds
+                setTimeout(function() {
+                    savedMessage.classList.add('hidden');
+                }, 3000);
+            } else {
+                alert('센터명 저장 중 오류가 발생했습니다.');
+            }
+        });
+
+        // Logout
+        document.querySelector('a[href="index.html"]:last-of-type').addEventListener('click', async function(e) {
+            e.preventDefault();
+            await signOut();
         });
     </script>
 </body>
