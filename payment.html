@@ -362,9 +362,11 @@
         </div>
     </footer>
 
+    <!-- Config (gitignore에 추가됨) -->
+    <script src="config.js"></script>
     <script>
-        // TossPayments Client Key (테스트)
-        const clientKey = 'test_ck_DnyRpQWGrNanqXqgeLEBVKwv1M9E';
+        // TossPayments 초기화 (config.js에서 키 로드)
+        const clientKey = CONFIG.TOSS_CLIENT_KEY;
         const tossPayments = TossPayments(clientKey);
 
         // Selected plan data
