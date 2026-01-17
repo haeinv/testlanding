@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>마이페이지 - FitChat</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white dark:bg-[#0d1a14] border-r border-slate-200 dark:border-white/10 flex flex-col">
+            <!-- Logo -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="text-primary flex size-8 items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl">fitness_center</span>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-lg font-bold">FitChat</h2>
+                </a>
+            </div>
+
+            <!-- User Info -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                        <p class="text-slate-900 dark:text-white font-medium text-sm">김민수</p>
+                        <p class="text-slate-500 text-xs">minsu@email.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">
+                            <span class="material-symbols-outlined text-xl">dashboard</span>
+                            <span>마이페이지</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">receipt_long</span>
+                            <span>구매내역</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">download</span>
+                            <span>다운로드</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">support_agent</span>
+                            <span>고객지원</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">settings</span>
+                            <span>계정설정</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Logout -->
+            <div class="p-4 border-t border-slate-200 dark:border-white/10">
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined text-xl">logout</span>
+                    <span>로그아웃</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white dark:bg-[#0d1a14] border-b border-slate-200 dark:border-white/10 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-slate-900 dark:text-white text-2xl font-bold">마이페이지</h1>
+                        <p class="text-slate-500 text-sm">내 정보와 구매내역을 확인하세요</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="relative p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined">notifications</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <!-- Profile Section -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mb-6">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">내 정보</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start gap-6">
+                            <div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-4xl">person</span>
+                            </div>
+                            <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-slate-500 text-sm mb-1">이름</p>
+                                    <p class="text-slate-900 dark:text-white font-medium">김민수</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm mb-1">이메일</p>
+                                    <p class="text-slate-900 dark:text-white font-medium">minsu@email.com</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm mb-1">연락처</p>
+                                    <p class="text-slate-900 dark:text-white font-medium">010-1234-5678</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm mb-1">가입일</p>
+                                    <p class="text-slate-900 dark:text-white font-medium">2024년 1월 10일</p>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 text-primary border border-primary rounded-lg hover:bg-primary/10 transition-colors text-sm font-medium">
+                                정보수정
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-slate-500 text-sm">총 결제금액</span>
+                            <span class="material-symbols-outlined text-primary">payments</span>
+                        </div>
+                        <p class="text-slate-900 dark:text-white text-3xl font-bold">150,000<span class="text-lg">원</span></p>
+                    </div>
+                    <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-slate-500 text-sm">구매 프로그램</span>
+                            <span class="material-symbols-outlined text-primary">inventory_2</span>
+                        </div>
+                        <p class="text-slate-900 dark:text-white text-3xl font-bold">2<span class="text-lg">개</span></p>
+                    </div>
+                    <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-slate-500 text-sm">이용 상태</span>
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                        </div>
+                        <p class="text-primary text-xl font-bold">이용중</p>
+                        <p class="text-slate-500 text-xs mt-1">Pro 플랜</p>
+                    </div>
+                </div>
+
+                <!-- Purchase History -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
+                        <h2 class="text-slate-900 dark:text-white font-bold">구매내역</h2>
+                        <a href="#" class="text-primary text-sm font-medium hover:underline">전체보기</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-slate-50 dark:bg-white/5">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">주문번호</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">프로그램명</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">결제금액</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">결제일</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">상태</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">영수증</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-white/10">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-white/5">
+                                    <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">ORD-2024-0117</td>
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <p class="text-slate-900 dark:text-white font-medium">FitChat Pro 플랜</p>
+                                            <p class="text-slate-500 text-xs">1년 이용권</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">120,000원</td>
+                                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">2024.01.17</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium rounded-full">결제완료</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <button class="text-primary hover:underline text-sm">다운로드</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-white/5">
+                                    <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">ORD-2024-0110</td>
+                                    <td class="px-6 py-4">
+                                        <div>
+                                            <p class="text-slate-900 dark:text-white font-medium">FitChat 사용 설명서</p>
+                                            <p class="text-slate-500 text-xs">PDF 자료</p>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">30,000원</td>
+                                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">2024.01.10</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium rounded-full">결제완료</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <button class="text-primary hover:underline text-sm">다운로드</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Download Section -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mt-6">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">다운로드 가능한 자료</h2>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-white/5 rounded-lg">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-red-500">picture_as_pdf</span>
+                                </div>
+                                <div>
+                                    <p class="text-slate-900 dark:text-white font-medium">FitChat 사용 설명서</p>
+                                    <p class="text-slate-500 text-xs">PDF · 15.2MB · 2024.01.10 구매</p>
+                                </div>
+                            </div>
+                            <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors text-sm">
+                                <span class="material-symbols-outlined text-lg">download</span>
+                                다운로드
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-white/5 rounded-lg">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-blue-500">folder_zip</span>
+                                </div>
+                                <div>
+                                    <p class="text-slate-900 dark:text-white font-medium">FitChat Pro 설치 파일</p>
+                                    <p class="text-slate-500 text-xs">ZIP · 128.5MB · 2024.01.17 구매</p>
+                                </div>
+                            </div>
+                            <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors text-sm">
+                                <span class="material-symbols-outlined text-lg">download</span>
+                                다운로드
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

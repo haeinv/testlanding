@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>관리자 대시보드 - FitChat</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "sidebar": "#0f172a",
+                        "card": "#1e293b",
+                        "card-light": "#334155",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+        .stat-card-1 { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+        .stat-card-2 { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        .stat-card-3 { background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); }
+        .stat-card-4 { background: linear-gradient(135deg, #f97316 0%, #c2410c 100%); }
+        .chart-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 2s ease-out forwards;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-white">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-sidebar/90 backdrop-blur-xl border-r border-white/5 flex flex-col fixed h-full z-10">
+            <!-- Logo -->
+            <div class="p-5 border-b border-white/5">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-emerald-400 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined text-black text-xl">fitness_center</span>
+                    </div>
+                    <h2 class="text-white text-xl font-bold">FitChat</h2>
+                </a>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-4 overflow-y-auto">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-primary/20 to-transparent text-primary font-medium border-l-2 border-primary">
+                            <span class="material-symbols-outlined text-xl">dashboard</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <span class="material-symbols-outlined text-xl">analytics</span>
+                            <span>Analysis</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <span class="material-symbols-outlined text-xl">shopping_cart</span>
+                            <span>eCommerce</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <p class="text-slate-500 text-xs font-medium uppercase tracking-wider mt-8 mb-3 px-4">관리</p>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <span class="material-symbols-outlined text-xl">group</span>
+                            <span>회원 관리</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <span class="material-symbols-outlined text-xl">receipt_long</span>
+                            <span>결제 관리</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <span class="material-symbols-outlined text-xl">inventory_2</span>
+                            <span>프로그램 관리</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <p class="text-slate-500 text-xs font-medium uppercase tracking-wider mt-8 mb-3 px-4">시스템</p>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <span class="material-symbols-outlined text-xl">settings</span>
+                            <span>설정</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            <span class="material-symbols-outlined text-xl">logout</span>
+                            <span>로그아웃</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64">
+            <!-- Header -->
+            <header class="sticky top-0 z-10 bg-sidebar/50 backdrop-blur-xl border-b border-white/5 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <button class="p-2 hover:bg-white/5 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined text-slate-400">menu</span>
+                        </button>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+                            <input type="text" placeholder="Search..." class="w-80 h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-primary/50 transition-colors">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="relative p-2 hover:bg-white/5 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined text-slate-400">notifications</span>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <button class="relative p-2 hover:bg-white/5 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined text-slate-400">shopping_cart</span>
+                            <span class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-black text-xs font-bold rounded-full flex items-center justify-center">8</span>
+                        </button>
+                        <div class="flex items-center gap-3 pl-4 border-l border-white/10">
+                            <img src="https://ui-avatars.com/api/?name=Admin&background=6366f1&color=fff&size=40" alt="Admin" class="w-10 h-10 rounded-full">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <!-- Welcome Banner -->
+                <div class="glass-card rounded-2xl p-6 mb-6 flex items-center justify-between overflow-hidden relative">
+                    <div class="relative z-10">
+                        <p class="text-slate-400 text-sm">Welcome back</p>
+                        <h1 class="text-2xl font-bold text-white mt-1">관리자님!</h1>
+                        <div class="flex items-center gap-8 mt-4">
+                            <div>
+                                <p class="text-3xl font-bold text-primary">₩2,450,000</p>
+                                <p class="text-slate-400 text-sm mt-1">Today's Sales</p>
+                                <div class="w-24 h-1 bg-primary/30 rounded-full mt-2">
+                                    <div class="w-16 h-full bg-primary rounded-full"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-white">78.4%</p>
+                                <p class="text-slate-400 text-sm mt-1">Growth Rate</p>
+                                <div class="w-24 h-1 bg-orange-500/30 rounded-full mt-2">
+                                    <div class="w-20 h-full bg-orange-500 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute right-0 top-0 h-full opacity-80">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3" />
+                                    <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="200" cy="100" r="80" fill="url(#grad1)" />
+                            <circle cx="250" cy="150" r="50" fill="url(#grad1)" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Stats Cards Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <p class="text-3xl font-bold text-white">42.5K</p>
+                                <p class="text-slate-400 text-sm">Active Users</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-600 text-3xl">more_vert</span>
+                        </div>
+                        <!-- Mini Chart -->
+                        <div class="relative h-16">
+                            <svg class="w-full h-full" viewBox="0 0 100 40">
+                                <path d="M0,35 Q15,30 25,25 T50,20 T75,15 T100,5" fill="none" stroke="#22c55e" stroke-width="2" class="chart-line"/>
+                                <path d="M0,35 Q15,30 25,25 T50,20 T75,15 T100,5 L100,40 L0,40 Z" fill="url(#greenGrad)" opacity="0.3"/>
+                                <defs>
+                                    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.5" />
+                                        <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-primary text-sm font-medium">78%</span>
+                            <span class="text-slate-500 text-xs">24K users increased from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <p class="text-3xl font-bold text-white">97.4K</p>
+                                <p class="text-slate-400 text-sm">Total Users</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-600 text-3xl">more_vert</span>
+                        </div>
+                        <div class="relative h-16">
+                            <svg class="w-full h-full" viewBox="0 0 100 40">
+                                <path d="M0,30 Q20,35 30,20 T60,25 T80,10 T100,15" fill="none" stroke="#3b82f6" stroke-width="2" class="chart-line"/>
+                            </svg>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-blue-500 text-sm font-medium">12.5%</span>
+                            <span class="text-slate-500 text-xs">from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <p class="text-3xl font-bold text-white">82.7K</p>
+                                <p class="text-slate-400 text-sm">Total Clicks</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-600 text-3xl">more_vert</span>
+                        </div>
+                        <div class="flex items-end gap-1 h-16">
+                            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 40%"></div>
+                            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 60%"></div>
+                            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 45%"></div>
+                            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 80%"></div>
+                            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 55%"></div>
+                            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 70%"></div>
+                            <div class="flex-1 bg-cyan-500 rounded-t" style="height: 90%"></div>
+                            <div class="flex-1 bg-cyan-500/30 rounded-t" style="height: 65%"></div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-cyan-500 text-sm font-medium">12.5%</span>
+                            <span class="text-slate-500 text-xs">from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <p class="text-3xl font-bold text-white">68.4K</p>
+                                <p class="text-slate-400 text-sm">Total Views</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-600 text-3xl">more_vert</span>
+                        </div>
+                        <div class="relative h-16">
+                            <svg class="w-full h-full" viewBox="0 0 100 40">
+                                <circle cx="20" cy="30" r="4" fill="#ec4899"/>
+                                <circle cx="40" cy="15" r="4" fill="#ec4899"/>
+                                <circle cx="60" cy="25" r="4" fill="#ec4899"/>
+                                <circle cx="80" cy="10" r="4" fill="#ec4899"/>
+                                <path d="M20,30 L40,15 L60,25 L80,10" fill="none" stroke="#ec4899" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-pink-500 text-sm font-medium">35K</span>
+                            <span class="text-slate-500 text-xs">users increased from last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Monthly Revenue Chart -->
+                    <div class="lg:col-span-2 glass-card rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-lg font-bold text-white">Monthly Revenue</h2>
+                            <span class="material-symbols-outlined text-slate-500">more_vert</span>
+                        </div>
+                        <div class="flex items-end gap-3 h-48 mb-4">
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-60" style="height: 30%"></div>
+                                <span class="text-xs text-slate-500">Jan</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-70" style="height: 45%"></div>
+                                <span class="text-xs text-slate-500">Feb</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-80" style="height: 65%"></div>
+                                <span class="text-xs text-slate-500">Mar</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-70" style="height: 50%"></div>
+                                <span class="text-xs text-slate-500">Apr</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-60" style="height: 35%"></div>
+                                <span class="text-xs text-slate-500">May</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-75" style="height: 55%"></div>
+                                <span class="text-xs text-slate-500">Jun</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-85" style="height: 70%"></div>
+                                <span class="text-xs text-slate-500">Jul</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t" style="height: 90%"></div>
+                                <span class="text-xs text-slate-500">Aug</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 flex-1">
+                                <div class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t opacity-70" style="height: 48%"></div>
+                                <span class="text-xs text-slate-500">Sep</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-4">
+                            <p class="text-slate-400 text-sm">Average monthly sale for every author</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="text-4xl font-bold text-cyan-400">68.9%</span>
+                                <span class="text-green-500 text-sm">34.5% ▲</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Device Type Donut Chart -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-lg font-bold text-white">Device Type</h2>
+                            <span class="material-symbols-outlined text-slate-500">more_vert</span>
+                        </div>
+                        <div class="relative flex items-center justify-center mb-6">
+                            <svg class="w-48 h-48" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="12" stroke-dasharray="88 163" stroke-dashoffset="-20" stroke-linecap="round"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#f97316" stroke-width="12" stroke-dasharray="75 176" stroke-dashoffset="-108" stroke-linecap="round"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="12" stroke-dasharray="42 209" stroke-dashoffset="-183" stroke-linecap="round"/>
+                            </svg>
+                            <div class="absolute text-center">
+                                <p class="text-3xl font-bold text-white">68%</p>
+                                <p class="text-slate-400 text-sm">Total Views</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                    <span class="text-slate-400">Desktop</span>
+                                </div>
+                                <span class="text-white font-medium">35%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                    <span class="text-slate-400">Tablet</span>
+                                </div>
+                                <span class="text-white font-medium">48%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <span class="text-slate-400">Mobile</span>
+                                </div>
+                                <span class="text-white font-medium">27%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Total Accounts Card -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <p class="text-3xl font-bold text-white">85,247</p>
+                                    <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs font-medium rounded-full">▼ 23.7%</span>
+                                </div>
+                                <p class="text-slate-400 text-sm mt-1">Total Accounts</p>
+                            </div>
+                        </div>
+                        <div class="relative h-24">
+                            <svg class="w-full h-full" viewBox="0 0 200 60">
+                                <path d="M0,50 Q30,45 50,30 T100,40 T150,20 T200,35" fill="none" stroke="#eab308" stroke-width="3"/>
+                                <path d="M0,50 Q30,45 50,30 T100,40 T150,20 T200,35 L200,60 L0,60 Z" fill="url(#yellowGrad)" opacity="0.3"/>
+                                <defs>
+                                    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#eab308;stop-opacity:0.5" />
+                                        <stop offset="100%" style="stop-color:#eab308;stop-opacity:0" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Campaign Stats -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-lg font-bold text-white">Campaign Stats</h2>
+                            <span class="material-symbols-outlined text-slate-500">more_vert</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-green-500">campaign</span>
+                                    </div>
+                                    <span class="text-white">Campaigns</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-white font-medium">54</span>
+                                    <span class="text-green-500 text-sm ml-2">28%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-blue-500">mail</span>
+                                    </div>
+                                    <span class="text-white">Emails</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-white font-medium">245</span>
+                                    <span class="text-blue-500 text-sm ml-2">15%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-purple-500">groups</span>
+                                    </div>
+                                    <span class="text-white">Subscribers</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-white font-medium">1,842</span>
+                                    <span class="text-purple-500 text-sm ml-2">42%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Leads -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-lg font-bold text-white">Social Leads</h2>
+                            <span class="material-symbols-outlined text-slate-500">more_vert</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                                        <span class="text-white font-bold">f</span>
+                                    </div>
+                                    <span class="text-white">Facebook</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-white font-medium">55%</span>
+                                    <div class="w-16 h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <div class="w-9/12 h-full bg-blue-500 rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-sky-500 rounded-lg flex items-center justify-center">
+                                        <span class="text-white font-bold">t</span>
+                                    </div>
+                                    <span class="text-white">Twitter</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-white font-medium">32%</span>
+                                    <div class="w-16 h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <div class="w-1/3 h-full bg-sky-500 rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                                        <span class="text-white font-bold">in</span>
+                                    </div>
+                                    <span class="text-white">Instagram</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-white font-medium">78%</span>
+                                    <div class="w-16 h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <div class="w-10/12 h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
