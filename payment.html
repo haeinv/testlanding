@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>결제하기 - FitChat</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FitChat 구독 결제 페이지입니다. 피트니스 센터 관리의 새로운 기준을 시작하세요." />
+    <meta name="keywords" content="피트니스 관리, 헬스장 관리, PT 관리, 센터 관리 프로그램, FitChat, 핏챗, 결제" />
+    <meta name="author" content="FitChat" />
+    <meta name="robots" content="index, follow" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- TossPayments SDK -->
+    <script src="https://js.tosspayments.com/v1/payment"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .plan-card {
+            transition: all 0.3s ease;
+        }
+        .plan-card:hover {
+            transform: translateY(-4px);
+        }
+        .plan-card.selected {
+            border-color: #13ec92;
+            box-shadow: 0 0 0 2px #13ec92;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/10">
+        <div class="flex items-center p-4 justify-between max-w-7xl mx-auto">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="text-primary flex size-8 items-center justify-center">
+                    <span class="material-symbols-outlined text-3xl">fitness_center</span>
+                </div>
+                <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">FitChat</h2>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="about.html" class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors hidden sm:block">회사소개</a>
+                <a href="app.html" class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors hidden sm:block">어플소개</a>
+                <a href="payment.html" class="text-primary text-sm font-bold hover:text-primary transition-colors hidden sm:block">결제</a>
+                <a href="signup.html" class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors hidden sm:block">회원가입</a>
+                <a href="login.html" class="text-primary text-sm font-bold leading-normal tracking-[0.015em] hidden sm:block">로그인</a>
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-400 sm:hidden">menu</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 max-w-7xl mx-auto px-4 py-16 w-full">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-slate-900 dark:text-white text-4xl sm:text-5xl font-black mb-4">
+                요금제 선택
+            </h1>
+            <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+                센터 규모에 맞는 요금제를 선택하세요. 첫 달은 무료로 체험할 수 있습니다.
+            </p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <!-- Test Plan (100원) -->
+            <div class="plan-card bg-white dark:bg-[#193328]/30 rounded-2xl p-8 border-2 border-orange-500 relative cursor-pointer" data-plan="test" data-price="100" data-name="테스트 플랜">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span class="bg-orange-500 text-white text-xs font-bold px-4 py-1 rounded-full">테스트</span>
+                </div>
+                <div class="mb-6">
+                    <span class="inline-block px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-medium rounded-full mb-4">TEST</span>
+                    <h3 class="text-slate-900 dark:text-white text-2xl font-bold mb-2">Test</h3>
+                    <p class="text-slate-500 text-sm">결제 테스트용</p>
+                </div>
+                <div class="mb-6">
+                    <span class="text-slate-900 dark:text-white text-4xl font-black">₩100</span>
+                    <span class="text-slate-500 text-sm">/1회</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                        결제 테스트 전용
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                        실제 결제 확인
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                        환불 가능
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <span class="text-orange-500 font-medium text-sm">클릭하여 선택</span>
+                </div>
+            </div>
+
+            <!-- Basic Plan -->
+            <div class="plan-card bg-white dark:bg-[#193328]/30 rounded-2xl p-8 border-2 border-slate-200 dark:border-white/10 cursor-pointer" data-plan="basic" data-price="50000" data-name="Basic 플랜">
+                <div class="mb-6">
+                    <span class="inline-block px-3 py-1 bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full mb-4">BASIC</span>
+                    <h3 class="text-slate-900 dark:text-white text-2xl font-bold mb-2">Basic</h3>
+                    <p class="text-slate-500 text-sm">소규모 센터에 적합</p>
+                </div>
+                <div class="mb-6">
+                    <span class="text-slate-900 dark:text-white text-4xl font-black">₩50,000</span>
+                    <span class="text-slate-500 text-sm">/월</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        회원 50명 이하
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        기본 회원 관리
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        수업 알림 발송
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        이메일 지원
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <span class="text-primary font-medium text-sm">클릭하여 선택</span>
+                </div>
+            </div>
+
+            <!-- Pro Plan (Popular) -->
+            <div class="plan-card bg-white dark:bg-[#193328]/30 rounded-2xl p-8 border-2 border-primary relative cursor-pointer selected" data-plan="pro" data-price="90000" data-name="Pro 플랜">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span class="bg-primary text-black text-xs font-bold px-4 py-1 rounded-full">인기</span>
+                </div>
+                <div class="mb-6">
+                    <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-medium rounded-full mb-4">PRO</span>
+                    <h3 class="text-slate-900 dark:text-white text-2xl font-bold mb-2">Pro</h3>
+                    <p class="text-slate-500 text-sm">중소규모 센터에 적합</p>
+                </div>
+                <div class="mb-6">
+                    <span class="text-slate-900 dark:text-white text-4xl font-black">₩90,000</span>
+                    <span class="text-slate-500 text-sm">/월</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        회원 51~100명
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        고급 회원 관리
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        자동 결제 시스템
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        매출 분석 리포트
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        우선 지원
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <span class="text-primary font-medium text-sm">클릭하여 선택</span>
+                </div>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="plan-card bg-white dark:bg-[#193328]/30 rounded-2xl p-8 border-2 border-slate-200 dark:border-white/10 cursor-pointer" data-plan="enterprise" data-price="150000" data-name="Enterprise 플랜">
+                <div class="mb-6">
+                    <span class="inline-block px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-medium rounded-full mb-4">ENTERPRISE</span>
+                    <h3 class="text-slate-900 dark:text-white text-2xl font-bold mb-2">Enterprise</h3>
+                    <p class="text-slate-500 text-sm">대형 센터에 적합</p>
+                </div>
+                <div class="mb-6">
+                    <span class="text-slate-900 dark:text-white text-4xl font-black">₩150,000</span>
+                    <span class="text-slate-500 text-sm">/월</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        회원 100명 초과
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        모든 Pro 기능 포함
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        API 연동 지원
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        전담 매니저 배정
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        24/7 긴급 지원
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <span class="text-primary font-medium text-sm">클릭하여 선택</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary & Payment -->
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white dark:bg-[#193328]/30 rounded-2xl p-8 border border-slate-200 dark:border-white/10">
+                <h2 class="text-slate-900 dark:text-white text-xl font-bold mb-6">결제 정보</h2>
+
+                <!-- Order Summary -->
+                <div class="bg-slate-50 dark:bg-white/5 rounded-xl p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-slate-600 dark:text-slate-400">선택한 플랜</span>
+                        <span id="selected-plan-name" class="text-slate-900 dark:text-white font-bold">Pro 플랜</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-slate-600 dark:text-slate-400">이용 기간</span>
+                        <span class="text-slate-900 dark:text-white font-medium">1개월</span>
+                    </div>
+                    <div class="border-t border-slate-200 dark:border-white/10 pt-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-900 dark:text-white font-bold text-lg">총 결제금액</span>
+                            <span id="total-price" class="text-primary text-2xl font-black">₩90,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Info -->
+                <div class="space-y-4 mb-6">
+                    <div class="flex flex-col gap-2">
+                        <label for="customer-name" class="text-slate-900 dark:text-white text-sm font-medium">
+                            주문자명 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="customer-name"
+                            name="customer-name"
+                            required
+                            placeholder="이름을 입력하세요"
+                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="customer-email" class="text-slate-900 dark:text-white text-sm font-medium">
+                            이메일 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            id="customer-email"
+                            name="customer-email"
+                            required
+                            placeholder="이메일을 입력하세요"
+                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="customer-phone" class="text-slate-900 dark:text-white text-sm font-medium">
+                            연락처 <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="tel"
+                            id="customer-phone"
+                            name="customer-phone"
+                            required
+                            placeholder="010-1234-5678"
+                            class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="mb-6">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            id="agree-terms"
+                            class="w-5 h-5 mt-0.5 rounded border-slate-300 dark:border-slate-700 text-primary focus:ring-primary"
+                        />
+                        <span class="text-slate-600 dark:text-slate-400 text-sm">
+                            <a href="#" class="text-primary hover:underline">이용약관</a> 및
+                            <a href="#" class="text-primary hover:underline">개인정보처리방침</a>에 동의합니다.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Payment Button -->
+                <button
+                    id="payment-button"
+                    class="w-full h-14 bg-primary text-black font-bold rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <span class="material-symbols-outlined">credit_card</span>
+                    <span>결제하기</span>
+                </button>
+
+                <!-- Payment Methods Info -->
+                <div class="mt-6 flex items-center justify-center gap-4 text-slate-400">
+                    <span class="text-xs">결제 수단</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-slate-100 dark:bg-white/10 px-2 py-1 rounded">카드</span>
+                        <span class="text-xs bg-slate-100 dark:bg-white/10 px-2 py-1 rounded">계좌이체</span>
+                        <span class="text-xs bg-slate-100 dark:bg-white/10 px-2 py-1 rounded">가상계좌</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Free Trial Notice -->
+            <div class="text-center mt-6">
+                <p class="text-slate-500 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg align-middle">info</span>
+                    첫 달은 무료 체험 기간으로, 결제일로부터 30일 후 첫 결제가 진행됩니다.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-white/10">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">fitness_center</span>
+                    <span class="text-slate-900 dark:text-white font-bold">FitChat</span>
+                </div>
+                <p class="text-slate-500 text-sm">&copy; 2024 FitChat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // TossPayments Client Key (테스트)
+        const clientKey = 'test_ck_DnyRpQWGrNanqXqgeLEBVKwv1M9E';
+        const tossPayments = TossPayments(clientKey);
+
+        // Selected plan data
+        let selectedPlan = {
+            plan: 'pro',
+            price: 90000,
+            name: 'Pro 플랜'
+        };
+
+        // Plan selection
+        const planCards = document.querySelectorAll('.plan-card');
+        const selectedPlanName = document.getElementById('selected-plan-name');
+        const totalPrice = document.getElementById('total-price');
+
+        planCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove selected class from all cards
+                planCards.forEach(c => c.classList.remove('selected'));
+
+                // Add selected class to clicked card
+                this.classList.add('selected');
+
+                // Update selected plan data
+                selectedPlan = {
+                    plan: this.dataset.plan,
+                    price: parseInt(this.dataset.price),
+                    name: this.dataset.name
+                };
+
+                // Update UI
+                selectedPlanName.textContent = selectedPlan.name;
+                totalPrice.textContent = `₩${selectedPlan.price.toLocaleString()}`;
+            });
+        });
+
+        // Payment button
+        const paymentButton = document.getElementById('payment-button');
+
+        paymentButton.addEventListener('click', async function() {
+            const customerName = document.getElementById('customer-name').value.trim();
+            const customerEmail = document.getElementById('customer-email').value.trim();
+            const customerPhone = document.getElementById('customer-phone').value.trim();
+            const agreeTerms = document.getElementById('agree-terms').checked;
+
+            // Validation
+            if (!customerName) {
+                alert('주문자명을 입력해주세요.');
+                return;
+            }
+            if (!customerEmail) {
+                alert('이메일을 입력해주세요.');
+                return;
+            }
+            if (!customerPhone) {
+                alert('연락처를 입력해주세요.');
+                return;
+            }
+            if (!agreeTerms) {
+                alert('이용약관에 동의해주세요.');
+                return;
+            }
+
+            // Generate unique order ID
+            const orderId = 'FITCHAT_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+            // Get base URL for redirects
+            const getBaseUrl = () => {
+                const currentUrl = window.location.href;
+                const lastSlash = currentUrl.lastIndexOf('/');
+                return currentUrl.substring(0, lastSlash);
+            };
+
+            try {
+                // Request payment through TossPayments
+                await tossPayments.requestPayment('카드', {
+                    amount: selectedPlan.price,
+                    orderId: orderId,
+                    orderName: selectedPlan.name + ' (월간 구독)',
+                    customerName: customerName,
+                    customerEmail: customerEmail,
+                    successUrl: getBaseUrl() + '/payment-success.html',
+                    failUrl: getBaseUrl() + '/payment-fail.html',
+                });
+            } catch (error) {
+                if (error.code === 'USER_CANCEL') {
+                    // User cancelled the payment
+                    console.log('사용자가 결제를 취소했습니다.');
+                } else if (error.code === 'INVALID_CARD_COMPANY') {
+                    alert('지원하지 않는 카드입니다.');
+                } else {
+                    console.error('Payment error:', error);
+                    alert('결제 중 오류가 발생했습니다. 다시 시도해주세요.');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

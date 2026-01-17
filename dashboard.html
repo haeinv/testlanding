@@ -164,6 +164,38 @@
                     </div>
                 </div>
 
+                <!-- Center Name Section -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mb-6">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">센터 정보</h2>
+                    </div>
+                    <div class="p-6">
+                        <form id="center-form" class="flex flex-col sm:flex-row items-start sm:items-end gap-4">
+                            <div class="flex-1 w-full">
+                                <label for="center-name" class="block text-slate-500 text-sm mb-2">센터명</label>
+                                <input
+                                    type="text"
+                                    id="center-name"
+                                    name="center-name"
+                                    placeholder="센터명을 입력하세요"
+                                    class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                class="flex items-center gap-2 px-6 py-3 bg-primary text-black font-bold rounded-lg hover:bg-primary/90 transition-colors"
+                            >
+                                <span class="material-symbols-outlined text-lg">save</span>
+                                저장
+                            </button>
+                        </form>
+                        <div id="center-saved" class="hidden mt-4 flex items-center gap-2 text-green-500">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span class="text-sm font-medium">센터명이 저장되었습니다.</span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
@@ -289,6 +321,39 @@
             </div>
         </main>
     </div>
+    <script>
+        // Load saved center name from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCenterName = localStorage.getItem('centerName');
+            if (savedCenterName) {
+                document.getElementById('center-name').value = savedCenterName;
+            }
+        });
+
+        // Save center name
+        document.getElementById('center-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const centerName = document.getElementById('center-name').value.trim();
+
+            if (!centerName) {
+                alert('센터명을 입력해주세요.');
+                return;
+            }
+
+            // Save to localStorage
+            localStorage.setItem('centerName', centerName);
+
+            // Show success message
+            const savedMessage = document.getElementById('center-saved');
+            savedMessage.classList.remove('hidden');
+
+            // Hide message after 3 seconds
+            setTimeout(function() {
+                savedMessage.classList.add('hidden');
+            }, 3000);
+        });
+    </script>
 </body>
 
 </html>
