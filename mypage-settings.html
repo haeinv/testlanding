@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>계정설정 - FitChat</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #13ec92;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #13ec92;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white dark:bg-[#0d1a14] border-r border-slate-200 dark:border-white/10 flex flex-col">
+            <!-- Logo -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="text-primary flex size-8 items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl">fitness_center</span>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-lg font-bold">FitChat</h2>
+                </a>
+            </div>
+
+            <!-- User Info -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                        <p id="sidebar-user-name" class="text-slate-900 dark:text-white font-medium text-sm">로딩중...</p>
+                        <p id="sidebar-user-email" class="text-slate-500 text-xs">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">dashboard</span>
+                            <span>마이페이지</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-purchase.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">receipt_long</span>
+                            <span>구매내역</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-download.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">download</span>
+                            <span>다운로드</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-support.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">support_agent</span>
+                            <span>고객지원</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">
+                            <span class="material-symbols-outlined text-xl">settings</span>
+                            <span>계정설정</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Logout -->
+            <div class="p-4 border-t border-slate-200 dark:border-white/10">
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined text-xl">logout</span>
+                    <span>로그아웃</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white dark:bg-[#0d1a14] border-b border-slate-200 dark:border-white/10 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-slate-900 dark:text-white text-2xl font-bold">계정설정</h1>
+                        <p class="text-slate-500 text-sm">개인정보 및 계정 설정을 관리하세요</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="relative p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined">notifications</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="p-6 max-w-4xl">
+                <!-- Profile Section -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mb-6">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">프로필 정보</h2>
+                    </div>
+                    <div class="p-6">
+                        <form id="profile-form" class="space-y-6">
+                            <!-- Profile Image -->
+                            <div class="flex items-center gap-6">
+                                <div class="relative">
+                                    <div id="profile-avatar" class="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-primary text-4xl">person</span>
+                                    </div>
+                                    <label for="profile-image" class="absolute bottom-0 right-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-primary/90 transition-colors">
+                                        <span class="material-symbols-outlined text-black text-lg">photo_camera</span>
+                                    </label>
+                                    <input type="file" id="profile-image" class="hidden" accept="image/*">
+                                </div>
+                                <div>
+                                    <p class="text-slate-900 dark:text-white font-medium">프로필 사진</p>
+                                    <p class="text-slate-500 text-sm">JPG, PNG (최대 5MB)</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">이름</label>
+                                    <input type="text" id="setting-name" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">이메일</label>
+                                    <input type="email" id="setting-email" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 text-slate-500 cursor-not-allowed" disabled>
+                                </div>
+                                <div>
+                                    <label class="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">연락처</label>
+                                    <input type="tel" id="setting-phone" placeholder="010-0000-0000" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">센터명</label>
+                                    <input type="text" id="setting-center" placeholder="센터명 입력" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end">
+                                <button type="submit" class="px-6 py-3 bg-primary text-black font-bold rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
+                                    <span class="material-symbols-outlined">save</span>
+                                    변경사항 저장
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Password Section -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mb-6">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">비밀번호 변경</h2>
+                    </div>
+                    <div class="p-6">
+                        <form id="password-form" class="space-y-4">
+                            <div>
+                                <label class="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">현재 비밀번호</label>
+                                <input type="password" id="current-password" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">새 비밀번호</label>
+                                <input type="password" id="new-password" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <p class="text-slate-500 text-xs mt-1">8자 이상, 영문/숫자/특수문자 조합</p>
+                            </div>
+                            <div>
+                                <label class="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">새 비밀번호 확인</label>
+                                <input type="password" id="confirm-password" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="px-6 py-3 bg-slate-800 dark:bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
+                                    비밀번호 변경
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mb-6">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">알림 설정</h2>
+                    </div>
+                    <div class="divide-y divide-slate-200 dark:divide-white/10">
+                        <div class="p-4 flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-900 dark:text-white font-medium">이메일 알림</p>
+                                <p class="text-slate-500 text-sm">새로운 소식 및 업데이트를 이메일로 받습니다</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="notify-email" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                        <div class="p-4 flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-900 dark:text-white font-medium">마케팅 알림</p>
+                                <p class="text-slate-500 text-sm">프로모션 및 이벤트 정보를 받습니다</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="notify-marketing" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                        <div class="p-4 flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-900 dark:text-white font-medium">결제 알림</p>
+                                <p class="text-slate-500 text-sm">결제 및 구독 관련 알림을 받습니다</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="notify-payment" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscription Management -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mb-6">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">구독 관리</h2>
+                    </div>
+                    <div class="p-6">
+                        <div id="subscription-info" class="flex items-center justify-between p-4 bg-slate-50 dark:bg-white/5 rounded-lg">
+                            <div>
+                                <p class="text-slate-500 text-sm">현재 구독</p>
+                                <p id="current-plan" class="text-slate-900 dark:text-white font-bold text-lg">무료 플랜</p>
+                                <p id="plan-expire" class="text-slate-500 text-sm mt-1">-</p>
+                            </div>
+                            <a href="payment.html" class="px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                                업그레이드
+                            </a>
+                        </div>
+                        <button id="cancel-subscription" class="mt-4 text-red-500 text-sm hover:underline hidden">
+                            구독 취소하기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Account Delete -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-red-200 dark:border-red-900/30 mb-6">
+                    <div class="p-6 border-b border-red-200 dark:border-red-900/30">
+                        <h2 class="text-red-600 dark:text-red-400 font-bold">계정 삭제</h2>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">
+                            계정을 삭제하면 모든 데이터가 영구적으로 삭제되며 복구할 수 없습니다.
+                            구매한 상품 및 구독도 함께 삭제됩니다.
+                        </p>
+                        <button id="delete-account-btn" class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors">
+                            계정 삭제
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="delete-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-[#0d1a14] rounded-xl p-6 max-w-md w-full mx-4">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-red-500 text-2xl">warning</span>
+                </div>
+                <div>
+                    <h3 class="text-slate-900 dark:text-white font-bold text-lg">계정 삭제</h3>
+                    <p class="text-slate-500 text-sm">이 작업은 되돌릴 수 없습니다</p>
+                </div>
+            </div>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">
+                계정을 삭제하시려면 아래에 <strong class="text-red-500">"삭제합니다"</strong>를 입력해주세요.
+            </p>
+            <input type="text" id="delete-confirm-input" placeholder="삭제합니다" class="w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent mb-4">
+            <div class="flex gap-3">
+                <button id="cancel-delete" class="flex-1 h-12 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                    취소
+                </button>
+                <button id="confirm-delete" class="flex-1 h-12 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    계정 삭제
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    <script>
+        let currentUser = null;
+        let userData = null;
+
+        // Check authentication
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                await loadUserData();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Load user data
+        async function loadUserData() {
+            try {
+                const result = await getUserData(currentUser.uid);
+                if (result.success) {
+                    userData = result.data;
+
+                    // Sidebar
+                    document.getElementById('sidebar-user-name').textContent = userData.name || currentUser.displayName || '사용자';
+                    document.getElementById('sidebar-user-email').textContent = userData.email || currentUser.email;
+
+                    // Settings form
+                    document.getElementById('setting-name').value = userData.name || currentUser.displayName || '';
+                    document.getElementById('setting-email').value = userData.email || currentUser.email;
+                    document.getElementById('setting-phone').value = userData.phone || '';
+                    document.getElementById('setting-center').value = userData.centerName || '';
+
+                    // Subscription
+                    if (userData.subscription && userData.subscription.status === 'active') {
+                        document.getElementById('current-plan').textContent = userData.subscription.plan || 'Pro 플랜';
+                        document.getElementById('current-plan').className = 'text-primary font-bold text-lg';
+                        if (userData.subscription.expiresAt) {
+                            const expDate = userData.subscription.expiresAt.toDate();
+                            document.getElementById('plan-expire').textContent = `만료일: ${expDate.getFullYear()}.${String(expDate.getMonth() + 1).padStart(2, '0')}.${String(expDate.getDate()).padStart(2, '0')}`;
+                        }
+                        document.getElementById('cancel-subscription').classList.remove('hidden');
+                    }
+
+                    // Notification settings
+                    if (userData.notifications) {
+                        document.getElementById('notify-email').checked = userData.notifications.email !== false;
+                        document.getElementById('notify-marketing').checked = userData.notifications.marketing === true;
+                        document.getElementById('notify-payment').checked = userData.notifications.payment !== false;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        // Save profile
+        document.getElementById('profile-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('setting-name').value.trim();
+            const phone = document.getElementById('setting-phone').value.trim();
+            const centerName = document.getElementById('setting-center').value.trim();
+
+            try {
+                await db.collection('users').doc(currentUser.uid).update({
+                    name: name,
+                    phone: phone,
+                    centerName: centerName,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                alert('프로필이 저장되었습니다.');
+                await loadUserData();
+            } catch (error) {
+                console.error('Error saving profile:', error);
+                alert('프로필 저장 중 오류가 발생했습니다.');
+            }
+        });
+
+        // Change password
+        document.getElementById('password-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('새 비밀번호가 일치하지 않습니다.');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                alert('비밀번호는 8자 이상이어야 합니다.');
+                return;
+            }
+
+            try {
+                // Re-authenticate
+                const credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, currentPassword);
+                await currentUser.reauthenticateWithCredential(credential);
+
+                // Update password
+                await currentUser.updatePassword(newPassword);
+
+                alert('비밀번호가 변경되었습니다.');
+                document.getElementById('password-form').reset();
+            } catch (error) {
+                console.error('Error changing password:', error);
+                if (error.code === 'auth/wrong-password') {
+                    alert('현재 비밀번호가 올바르지 않습니다.');
+                } else {
+                    alert('비밀번호 변경 중 오류가 발생했습니다.');
+                }
+            }
+        });
+
+        // Notification settings change
+        ['notify-email', 'notify-marketing', 'notify-payment'].forEach(id => {
+            document.getElementById(id).addEventListener('change', async function() {
+                try {
+                    await db.collection('users').doc(currentUser.uid).update({
+                        notifications: {
+                            email: document.getElementById('notify-email').checked,
+                            marketing: document.getElementById('notify-marketing').checked,
+                            payment: document.getElementById('notify-payment').checked
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error saving notification settings:', error);
+                }
+            });
+        });
+
+        // Delete account modal
+        document.getElementById('delete-account-btn').addEventListener('click', function() {
+            document.getElementById('delete-modal').classList.remove('hidden');
+        });
+
+        document.getElementById('cancel-delete').addEventListener('click', function() {
+            document.getElementById('delete-modal').classList.add('hidden');
+            document.getElementById('delete-confirm-input').value = '';
+            document.getElementById('confirm-delete').disabled = true;
+        });
+
+        document.getElementById('delete-confirm-input').addEventListener('input', function() {
+            document.getElementById('confirm-delete').disabled = this.value !== '삭제합니다';
+        });
+
+        document.getElementById('confirm-delete').addEventListener('click', async function() {
+            if (document.getElementById('delete-confirm-input').value !== '삭제합니다') return;
+
+            try {
+                // Delete user data from Firestore
+                await db.collection('users').doc(currentUser.uid).delete();
+
+                // Delete user account
+                await currentUser.delete();
+
+                alert('계정이 삭제되었습니다.');
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Error deleting account:', error);
+                if (error.code === 'auth/requires-recent-login') {
+                    alert('보안을 위해 다시 로그인 후 시도해주세요.');
+                    await signOut();
+                } else {
+                    alert('계정 삭제 중 오류가 발생했습니다.');
+                }
+            }
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', async function() {
+            await signOut();
+        });
+    </script>
+</body>
+
+</html>

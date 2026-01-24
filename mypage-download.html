@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>다운로드 - FitChat</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white dark:bg-[#0d1a14] border-r border-slate-200 dark:border-white/10 flex flex-col">
+            <!-- Logo -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="text-primary flex size-8 items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl">fitness_center</span>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-lg font-bold">FitChat</h2>
+                </a>
+            </div>
+
+            <!-- User Info -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                        <p id="sidebar-user-name" class="text-slate-900 dark:text-white font-medium text-sm">로딩중...</p>
+                        <p id="sidebar-user-email" class="text-slate-500 text-xs">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">dashboard</span>
+                            <span>마이페이지</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-purchase.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">receipt_long</span>
+                            <span>구매내역</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-download.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">
+                            <span class="material-symbols-outlined text-xl">download</span>
+                            <span>다운로드</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-support.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">support_agent</span>
+                            <span>고객지원</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">settings</span>
+                            <span>계정설정</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Logout -->
+            <div class="p-4 border-t border-slate-200 dark:border-white/10">
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined text-xl">logout</span>
+                    <span>로그아웃</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white dark:bg-[#0d1a14] border-b border-slate-200 dark:border-white/10 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-slate-900 dark:text-white text-2xl font-bold">다운로드</h1>
+                        <p class="text-slate-500 text-sm">구매한 자료와 프로그램을 다운로드하세요</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="relative p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined">notifications</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="p-6">
+                <!-- Category Tabs -->
+                <div class="flex gap-2 mb-6">
+                    <button class="tab-btn active px-4 py-2 rounded-lg bg-primary text-black font-medium transition-colors" data-tab="all">
+                        전체
+                    </button>
+                    <button class="tab-btn px-4 py-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors" data-tab="software">
+                        소프트웨어
+                    </button>
+                    <button class="tab-btn px-4 py-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors" data-tab="document">
+                        문서
+                    </button>
+                    <button class="tab-btn px-4 py-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors" data-tab="resource">
+                        리소스
+                    </button>
+                </div>
+
+                <!-- Download List -->
+                <div id="download-list" class="space-y-4">
+                    <!-- Software Section -->
+                    <div class="download-item" data-category="software">
+                        <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="material-symbols-outlined text-blue-500 text-3xl">desktop_windows</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between">
+                                        <div>
+                                            <h3 class="text-slate-900 dark:text-white font-bold text-lg">FitChat Pro - Windows</h3>
+                                            <p class="text-slate-500 text-sm mt-1">Windows 10/11 64bit 지원</p>
+                                        </div>
+                                        <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium rounded-full">최신버전</span>
+                                    </div>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">folder_zip</span>
+                                            128.5 MB
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">update</span>
+                                            v2.5.1
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">calendar_today</span>
+                                            2026.01.15
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-3 mt-4">
+                                        <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            다운로드
+                                        </button>
+                                        <button class="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">description</span>
+                                            설치 가이드
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="download-item" data-category="software">
+                        <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="material-symbols-outlined text-slate-500 text-3xl">laptop_mac</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between">
+                                        <div>
+                                            <h3 class="text-slate-900 dark:text-white font-bold text-lg">FitChat Pro - macOS</h3>
+                                            <p class="text-slate-500 text-sm mt-1">macOS 12 Monterey 이상 지원 (Apple Silicon / Intel)</p>
+                                        </div>
+                                        <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium rounded-full">최신버전</span>
+                                    </div>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">folder_zip</span>
+                                            145.2 MB
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">update</span>
+                                            v2.5.1
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">calendar_today</span>
+                                            2026.01.15
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-3 mt-4">
+                                        <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            다운로드
+                                        </button>
+                                        <button class="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">description</span>
+                                            설치 가이드
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Document Section -->
+                    <div class="download-item" data-category="document">
+                        <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="material-symbols-outlined text-red-500 text-3xl">picture_as_pdf</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between">
+                                        <div>
+                                            <h3 class="text-slate-900 dark:text-white font-bold text-lg">FitChat 사용 설명서</h3>
+                                            <p class="text-slate-500 text-sm mt-1">FitChat Pro 전체 기능 사용 가이드</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">picture_as_pdf</span>
+                                            15.2 MB
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">menu_book</span>
+                                            124 페이지
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">calendar_today</span>
+                                            2026.01.10
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-3 mt-4">
+                                        <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            다운로드
+                                        </button>
+                                        <button class="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">visibility</span>
+                                            미리보기
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="download-item" data-category="document">
+                        <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="material-symbols-outlined text-red-500 text-3xl">picture_as_pdf</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between">
+                                        <div>
+                                            <h3 class="text-slate-900 dark:text-white font-bold text-lg">회원 관리 가이드북</h3>
+                                            <p class="text-slate-500 text-sm mt-1">효과적인 회원 관리 방법 및 팁</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">picture_as_pdf</span>
+                                            8.7 MB
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">menu_book</span>
+                                            56 페이지
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">calendar_today</span>
+                                            2026.01.05
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-3 mt-4">
+                                        <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            다운로드
+                                        </button>
+                                        <button class="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">visibility</span>
+                                            미리보기
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resource Section -->
+                    <div class="download-item" data-category="resource">
+                        <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="material-symbols-outlined text-green-500 text-3xl">table_chart</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between">
+                                        <div>
+                                            <h3 class="text-slate-900 dark:text-white font-bold text-lg">회원 관리 엑셀 템플릿</h3>
+                                            <p class="text-slate-500 text-sm mt-1">회원 정보 관리를 위한 엑셀 템플릿</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">table_chart</span>
+                                            2.1 MB
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">description</span>
+                                            XLSX
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">calendar_today</span>
+                                            2026.01.01
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-3 mt-4">
+                                        <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            다운로드
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="download-item" data-category="resource">
+                        <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="material-symbols-outlined text-purple-500 text-3xl">image</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between">
+                                        <div>
+                                            <h3 class="text-slate-900 dark:text-white font-bold text-lg">마케팅 이미지 리소스</h3>
+                                            <p class="text-slate-500 text-sm mt-1">SNS 및 홍보용 이미지 템플릿 모음</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">folder_zip</span>
+                                            45.8 MB
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">photo_library</span>
+                                            32개 파일
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">calendar_today</span>
+                                            2025.12.20
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-3 mt-4">
+                                        <button class="flex items-center gap-2 px-4 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            다운로드
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="hidden bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 p-12 text-center">
+                    <span class="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600 mb-4">cloud_download</span>
+                    <h3 class="text-slate-900 dark:text-white font-bold text-lg mb-2">다운로드 가능한 파일이 없습니다</h3>
+                    <p class="text-slate-500 text-sm mb-6">상품을 구매하시면 여기서 다운로드할 수 있습니다.</p>
+                    <a href="payment.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        상품 둘러보기
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    <script>
+        let currentUser = null;
+        let userData = null;
+
+        // Check authentication
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                await loadUserData();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Load user data
+        async function loadUserData() {
+            try {
+                const result = await getUserData(currentUser.uid);
+                if (result.success) {
+                    userData = result.data;
+                    document.getElementById('sidebar-user-name').textContent = userData.name || currentUser.displayName || '사용자';
+                    document.getElementById('sidebar-user-email').textContent = userData.email || currentUser.email;
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active tab
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-primary', 'text-black');
+                    b.classList.add('bg-slate-100', 'dark:bg-white/5', 'text-slate-600', 'dark:text-slate-400');
+                });
+                this.classList.add('active', 'bg-primary', 'text-black');
+                this.classList.remove('bg-slate-100', 'dark:bg-white/5', 'text-slate-600', 'dark:text-slate-400');
+
+                // Filter items
+                const category = this.dataset.tab;
+                document.querySelectorAll('.download-item').forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', async function() {
+            await signOut();
+        });
+    </script>
+</body>
+
+</html>

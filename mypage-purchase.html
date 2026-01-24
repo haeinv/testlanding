@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>구매내역 - FitChat</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white dark:bg-[#0d1a14] border-r border-slate-200 dark:border-white/10 flex flex-col">
+            <!-- Logo -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="text-primary flex size-8 items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl">fitness_center</span>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-lg font-bold">FitChat</h2>
+                </a>
+            </div>
+
+            <!-- User Info -->
+            <div class="p-4 border-b border-slate-200 dark:border-white/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                        <p id="sidebar-user-name" class="text-slate-900 dark:text-white font-medium text-sm">로딩중...</p>
+                        <p id="sidebar-user-email" class="text-slate-500 text-xs">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">dashboard</span>
+                            <span>마이페이지</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-purchase.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">
+                            <span class="material-symbols-outlined text-xl">receipt_long</span>
+                            <span>구매내역</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-download.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">download</span>
+                            <span>다운로드</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-support.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">support_agent</span>
+                            <span>고객지원</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mypage-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                            <span class="material-symbols-outlined text-xl">settings</span>
+                            <span>계정설정</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Logout -->
+            <div class="p-4 border-t border-slate-200 dark:border-white/10">
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined text-xl">logout</span>
+                    <span>로그아웃</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white dark:bg-[#0d1a14] border-b border-slate-200 dark:border-white/10 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-slate-900 dark:text-white text-2xl font-bold">구매내역</h1>
+                        <p class="text-slate-500 text-sm">결제 및 구독 내역을 확인하세요</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="relative p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined">notifications</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="p-6">
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-slate-500 text-sm">총 결제금액</span>
+                            <span class="material-symbols-outlined text-primary">payments</span>
+                        </div>
+                        <p id="stat-total" class="text-slate-900 dark:text-white text-2xl font-bold">0<span class="text-base">원</span></p>
+                    </div>
+                    <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-slate-500 text-sm">총 결제건수</span>
+                            <span class="material-symbols-outlined text-primary">receipt</span>
+                        </div>
+                        <p id="stat-count" class="text-slate-900 dark:text-white text-2xl font-bold">0<span class="text-base">건</span></p>
+                    </div>
+                    <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-slate-500 text-sm">현재 구독</span>
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                        </div>
+                        <p id="stat-subscription" class="text-slate-500 text-lg font-bold">미구독</p>
+                    </div>
+                    <div class="bg-white dark:bg-[#193328]/30 rounded-xl p-5 border border-slate-200 dark:border-white/10">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-slate-500 text-sm">다음 결제일</span>
+                            <span class="material-symbols-outlined text-primary">calendar_month</span>
+                        </div>
+                        <p id="stat-next-payment" class="text-slate-500 text-lg font-bold">-</p>
+                    </div>
+                </div>
+
+                <!-- Filter & Search -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10 mb-6">
+                    <div class="p-4 flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                                <input type="text" id="search-input" placeholder="주문번호 또는 상품명 검색" class="w-full h-10 pl-10 pr-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <select id="filter-status" class="h-10 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="">전체 상태</option>
+                                <option value="completed">결제완료</option>
+                                <option value="cancelled">취소됨</option>
+                                <option value="refunded">환불됨</option>
+                            </select>
+                            <select id="filter-period" class="h-10 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="">전체 기간</option>
+                                <option value="1">최근 1개월</option>
+                                <option value="3">최근 3개월</option>
+                                <option value="6">최근 6개월</option>
+                                <option value="12">최근 1년</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase List -->
+                <div class="bg-white dark:bg-[#193328]/30 rounded-xl border border-slate-200 dark:border-white/10">
+                    <div class="p-6 border-b border-slate-200 dark:border-white/10">
+                        <h2 class="text-slate-900 dark:text-white font-bold">결제 내역</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-slate-50 dark:bg-white/5">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">주문번호</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">상품명</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">결제금액</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">결제방법</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">결제일시</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">상태</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">영수증</th>
+                                </tr>
+                            </thead>
+                            <tbody id="purchase-list" class="divide-y divide-slate-200 dark:divide-white/10">
+                                <tr>
+                                    <td colspan="7" class="px-6 py-12 text-center text-slate-500">
+                                        <span class="material-symbols-outlined text-4xl mb-2 block">receipt_long</span>
+                                        결제 내역을 불러오는 중...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-6">
+                    <nav class="flex items-center gap-1">
+                        <button class="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <button class="w-10 h-10 rounded-lg bg-primary text-black font-medium">1</button>
+                        <button class="w-10 h-10 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5">2</button>
+                        <button class="w-10 h-10 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5">3</button>
+                        <button class="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    <script>
+        let currentUser = null;
+        let userData = null;
+        let allPayments = [];
+
+        // Check authentication
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                await loadUserData();
+                await loadPayments();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Load user data
+        async function loadUserData() {
+            try {
+                const result = await getUserData(currentUser.uid);
+                if (result.success) {
+                    userData = result.data;
+                    document.getElementById('sidebar-user-name').textContent = userData.name || currentUser.displayName || '사용자';
+                    document.getElementById('sidebar-user-email').textContent = userData.email || currentUser.email;
+
+                    // Subscription status
+                    if (userData.subscription && userData.subscription.status === 'active') {
+                        document.getElementById('stat-subscription').textContent = userData.subscription.plan || '이용중';
+                        document.getElementById('stat-subscription').className = 'text-primary text-lg font-bold';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        // Load payments
+        async function loadPayments() {
+            try {
+                const snapshot = await db.collection('payments')
+                    .where('userId', '==', currentUser.uid)
+                    .orderBy('createdAt', 'desc')
+                    .get();
+
+                allPayments = [];
+                let totalAmount = 0;
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    allPayments.push({ id: doc.id, ...data });
+                    totalAmount += data.amount || 0;
+                });
+
+                // Update stats
+                document.getElementById('stat-total').innerHTML = `${totalAmount.toLocaleString()}<span class="text-base">원</span>`;
+                document.getElementById('stat-count').innerHTML = `${allPayments.length}<span class="text-base">건</span>`;
+
+                renderPayments(allPayments);
+            } catch (error) {
+                console.error('Error loading payments:', error);
+                document.getElementById('purchase-list').innerHTML = `
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center text-slate-500">
+                            <span class="material-symbols-outlined text-4xl mb-2 block">error</span>
+                            결제 내역을 불러오는 중 오류가 발생했습니다.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Render payments
+        function renderPayments(payments) {
+            const tbody = document.getElementById('purchase-list');
+
+            if (payments.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center text-slate-500">
+                            <span class="material-symbols-outlined text-4xl mb-2 block">receipt_long</span>
+                            결제 내역이 없습니다.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = payments.map(payment => {
+                const date = payment.createdAt ? payment.createdAt.toDate() : new Date();
+                const dateStr = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+
+                const statusClass = payment.status === 'cancelled' || payment.status === 'refunded'
+                    ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                    : 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400';
+
+                const statusText = payment.status === 'cancelled' ? '취소됨' : payment.status === 'refunded' ? '환불됨' : '결제완료';
+
+                return `
+                    <tr class="hover:bg-slate-50 dark:hover:bg-white/5">
+                        <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">${payment.orderId || '-'}</td>
+                        <td class="px-6 py-4">
+                            <div>
+                                <p class="text-slate-900 dark:text-white font-medium">${payment.planName || '-'}</p>
+                                <p class="text-slate-500 text-xs">${payment.planType || '월간 구독'}</p>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-slate-900 dark:text-white font-medium">${(payment.amount || 0).toLocaleString()}원</td>
+                        <td class="px-6 py-4 text-slate-600 dark:text-slate-400">${payment.paymentMethod || '카드'}</td>
+                        <td class="px-6 py-4 text-slate-600 dark:text-slate-400">${dateStr}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 ${statusClass} text-xs font-medium rounded-full">${statusText}</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button onclick="viewReceipt('${payment.id}')" class="text-primary hover:underline text-sm">영수증</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // View receipt
+        function viewReceipt(paymentId) {
+            const payment = allPayments.find(p => p.id === paymentId);
+            if (payment && payment.receiptUrl) {
+                window.open(payment.receiptUrl, '_blank');
+            } else {
+                alert('영수증을 불러올 수 없습니다.');
+            }
+        }
+
+        // Search
+        document.getElementById('search-input').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = allPayments.filter(p =>
+                (p.orderId && p.orderId.toLowerCase().includes(query)) ||
+                (p.planName && p.planName.toLowerCase().includes(query))
+            );
+            renderPayments(filtered);
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', async function() {
+            await signOut();
+        });
+    </script>
+</body>
+
+</html>
